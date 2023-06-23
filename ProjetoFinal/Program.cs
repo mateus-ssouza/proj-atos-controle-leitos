@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ProjetoFinal.Data;
+using ProjetoFinal.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +8,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<Contexto>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("Contexto") ?? throw new InvalidOperationException("Connection string 'Contexto' not found.")));
+
+
+// Adicionando os servicos na injecao de dependencias
+builder.Services.AddScoped<PacienteService>();
 
 var app = builder.Build();
 
