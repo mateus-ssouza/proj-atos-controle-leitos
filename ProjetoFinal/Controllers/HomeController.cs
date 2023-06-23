@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ProjetoFinal.Models;
+using ProjetoFinal.Models.ViewModels;
 using System.Diagnostics;
 
 namespace ProjetoFinal.Controllers

@@ -1,7 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using ProjetoFinal.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddDbContext<Contexto>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("Contexto") ?? throw new InvalidOperationException("Connection string 'Contexto' not found.")));
 
 var app = builder.Build();
 

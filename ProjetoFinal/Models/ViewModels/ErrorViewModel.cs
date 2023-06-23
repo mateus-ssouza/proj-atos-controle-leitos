@@ -1,4 +1,4 @@
-namespace ProjetoFinal.Models
+namespace ProjetoFinal.Models.ViewModels
 {
     public class ErrorViewModel
     {
