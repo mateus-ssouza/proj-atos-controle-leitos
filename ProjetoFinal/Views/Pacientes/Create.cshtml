@@ -1,0 +1,84 @@
+﻿@model ProjetoFinal.Models.ViewModels.PacienteViewModel
+
+@{
+    ViewData["Title"] = "Cadastro";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row form-control">
+
+    <h4>Paciente</h4>
+
+    <hr />
+
+    <div class="col-md-4">
+        <form asp-action="Create">
+
+            <div class="form-group">
+                <label asp-for="Paciente.Nome" class="form-label"></label>
+                <input asp-for="Paciente.Nome" class="form-control" />
+                <span asp-validation-for="Paciente.Nome" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Paciente.DataNascimento" class="form-label"></label>
+                <input asp-for="Paciente.DataNascimento" class="form-control" />
+                <span asp-validation-for="Paciente.DataNascimento" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Paciente.Cpf" class="form-label"></label>
+                <input asp-for="Paciente.Cpf" class="form-control" />
+                <span asp-validation-for="Paciente.Cpf" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Paciente.Email" class="form-label"></label>
+                <input asp-for="Paciente.Email" class="form-control" />
+                <span asp-validation-for="Paciente.Email" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Paciente.Telefone" class="form-label"></label>
+                <input asp-for="Paciente.Telefone" class="form-control" />
+                <span asp-validation-for="Paciente.Telefone" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Endereco.Cidade" class="form-label"></label>
+                <input asp-for="Endereco.Cidade" class="form-control" />
+                <span asp-validation-for="Endereco.Cidade" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Endereco.Estado" class="form-label"></label>
+                <input asp-for="Endereco.Estado" class="form-control" />
+                <span asp-validation-for="Endereco.Estado" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Endereco.Cep" class="form-label"></label>
+                <input asp-for="Endereco.Cep" class="form-control" />
+                <span asp-validation-for="Endereco.Cep" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Endereco.Bairro" class="form-label"></label>
+                <input asp-for="Endereco.Bairro" class="form-control" />
+                <span asp-validation-for="Endereco.Bairro" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Endereco.Numero" class="form-label"></label>
+                <input asp-for="Endereco.Numero" class="form-control" />
+                <span asp-validation-for="Endereco.Numero" class="text-danger"></span>
+            </div>
+
+            <br />
+            <div>
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>

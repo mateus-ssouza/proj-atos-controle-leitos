@@ -12,6 +12,7 @@ builder.Services.AddDbContext<Contexto>(options =>
 
 // Adicionando os servicos na injecao de dependencias
 builder.Services.AddScoped<PacienteService>();
+builder.Services.AddScoped<EnderecoService>();
 
 var app = builder.Build();
 

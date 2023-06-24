@@ -3,21 +3,16 @@ using ProjetoFinal.Models;
 
 namespace ProjetoFinal.Services
 {
-    public class PacienteService
+    public class EnderecoService
     {
         private readonly Contexto _contexto;
 
-        public PacienteService(Contexto contexto)
+        public EnderecoService(Contexto contexto)
         {
             _contexto = contexto;
         }
 
-        public List<Paciente> FindAll()
-        {
-            return _contexto.Paciente.ToList();
-        }
-
-        public void Insert(Paciente obj)
+        public void Insert(Endereco obj)
         {
             _contexto.Add(obj);
             _contexto.SaveChanges();
