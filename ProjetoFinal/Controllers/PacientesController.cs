@@ -3,6 +3,7 @@ using ProjetoFinal.Models;
 using ProjetoFinal.Models.ViewModels;
 using ProjetoFinal.Services;
 using ProjetoFinal.Services.Exceptions;
+using System.Diagnostics;
 
 namespace ProjetoFinal.Controllers
 {
@@ -49,14 +50,16 @@ namespace ProjetoFinal.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), 
+                    new {message = "Id não fornecido"});
             }
 
             var obj = _pacienteService.FindById(id.Value);
             
             if (obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error),
+                    new { message = "Id não encontrado" });
             }
 
             return View(obj);
@@ -74,14 +77,16 @@ namespace ProjetoFinal.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error),
+                    new { message = "Id não fornecido" });
             }
 
             var obj = _pacienteService.FindById(id.Value);
 
             if (obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error),
+                    new { message = "Id não encontrado" });
             }
 
             return View(obj);
@@ -91,14 +96,16 @@ namespace ProjetoFinal.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error),
+                    new { message = "Id não fornecido" });
             }
 
             var obj = _pacienteService.FindById(id.Value);
             
             if (obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error),
+                     new { message = "Id não encontrado" });
             }
 
             PacienteViewModel viewModel = new PacienteViewModel
@@ -116,7 +123,8 @@ namespace ProjetoFinal.Controllers
         {
             if (id != obj.Id)
             {
-                return BadRequest();
+                return RedirectToAction(nameof(Error),
+                    new { message = "Ids não correspondem" });
             }
 
             try
@@ -125,7 +133,8 @@ namespace ProjetoFinal.Controllers
 
                 if (obj == null)
                 {
-                    return NotFound();
+                    return RedirectToAction(nameof(Error),
+                    new { message = "Id não encontrado" });
                 }
 
                 paciente.Endereco = obj.Endereco;
@@ -133,14 +142,22 @@ namespace ProjetoFinal.Controllers
                 _pacienteService.Update(paciente);
                 return RedirectToAction(nameof(Index));
             }
-            catch (NotFoundException)
+            catch (ApplicationException e)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error),
+                    new { message = e.Message });
             }
-            catch (DbConcurrencyException)
+        }
+
+        public IActionResult Error(string message)
+        {
+            var viewModel = new ErrorViewModel
             {
-                return BadRequest();
-            }
+                Message = message,
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            };
+
+            return View(viewModel);
         }
     }
 }
