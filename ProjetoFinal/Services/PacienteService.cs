@@ -1,4 +1,5 @@
-﻿using ProjetoFinal.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjetoFinal.Data;
 using ProjetoFinal.Models;
 
 namespace ProjetoFinal.Services
@@ -25,7 +26,9 @@ namespace ProjetoFinal.Services
 
         public Paciente FindById(int id)
         {
-            return _contexto.Paciente.FirstOrDefault(obj => obj.Id == id);
+            return _contexto.Paciente
+                .Include(obj => obj.Endereco)
+                .FirstOrDefault(obj => obj.Id == id);
         }
 
         public void Remove(int id)
