@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ProjetoFinal.Models;
 using ProjetoFinal.Models.ViewModels;
 using ProjetoFinal.Services;
+using ProjetoFinal.Services.Exceptions;
 
 namespace ProjetoFinal.Controllers
 {
@@ -83,6 +85,62 @@ namespace ProjetoFinal.Controllers
             }
 
             return View(obj);
+        }
+
+        public IActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var obj = _pacienteService.FindById(id.Value);
+            
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            PacienteViewModel viewModel = new PacienteViewModel
+            {
+                Paciente = obj,
+                Endereco = obj.Endereco
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, Paciente obj)
+        {
+            if (id != obj.Id)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                var paciente = _pacienteService.FindById(id);
+
+                if (obj == null)
+                {
+                    return NotFound();
+                }
+
+                paciente.Endereco = obj.Endereco;
+
+                _pacienteService.Update(paciente);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
+            catch (DbConcurrencyException)
+            {
+                return BadRequest();
+            }
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using ProjetoFinal.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using ProjetoFinal.Data;
 using ProjetoFinal.Models;
+using ProjetoFinal.Services.Exceptions;
 
 namespace ProjetoFinal.Services
 {
