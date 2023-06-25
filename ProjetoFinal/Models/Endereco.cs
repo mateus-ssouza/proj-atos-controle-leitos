@@ -1,13 +1,40 @@
-﻿namespace ProjetoFinal.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ProjetoFinal.Models
 {
     public class Endereco
     {
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "O campo {0} é requerido")]
+        [StringLength(2, MinimumLength = 2,
+            ErrorMessage = "{0} deve ter exatamente {1} caracteres.")]
         public string Estado { get; set; }
+
+        [Required(ErrorMessage = "O campo {0} é requerido")]
+        [StringLength(40, MinimumLength = 3,
+            ErrorMessage = "{0} deve ter entre {2} e {1} caracteres")]
         public string Cidade { get; set; }
+
+
+        [Required(ErrorMessage = "O campo {0} é requerido")]
+        [StringLength(40, MinimumLength = 3,
+            ErrorMessage = "{0} deve ter entre {2} e {1} caracteres")]
         public string Bairro { get; set; }
+
+
+        [Required(ErrorMessage = "O campo {0} é requerido")]
+        [StringLength(8, MinimumLength = 8,
+            ErrorMessage = "{0} deve ter {1} caracteres")]
         public string Cep { get; set; }
+
+        [Required(ErrorMessage = "O campo {0} é requerido")]
+        [StringLength(40, MinimumLength = 3,
+            ErrorMessage = "{0} deve ter entre {2} e {1} caracteres")]
         public string Rua { get; set; }
+
+        [Required(ErrorMessage = "O campo {0} é requerido")]
+        [StringLength(8)]
         public string Numero { get; set; }
 
         public int IdPaciente { get; set; }

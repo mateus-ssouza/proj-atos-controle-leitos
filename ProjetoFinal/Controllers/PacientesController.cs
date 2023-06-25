@@ -35,6 +35,11 @@ namespace ProjetoFinal.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(PacienteViewModel pacienteViewModel)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(pacienteViewModel);
+            }
+
             var paciente = pacienteViewModel.Paciente;
 
             var endereco = pacienteViewModel.Endereco;
@@ -101,7 +106,7 @@ namespace ProjetoFinal.Controllers
             }
 
             var obj = _pacienteService.FindById(id.Value);
-            
+
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error),
@@ -119,9 +124,15 @@ namespace ProjetoFinal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Paciente obj)
+        public IActionResult Edit(int id, PacienteViewModel viewModel)
         {
-            if (id != obj.Id)
+
+            if (!ModelState.IsValid)
+            {
+                return View(viewModel);
+            }
+
+            if (id != viewModel.Paciente.Id)
             {
                 return RedirectToAction(nameof(Error),
                     new { message = "Ids não correspondem" });
@@ -129,17 +140,10 @@ namespace ProjetoFinal.Controllers
 
             try
             {
-                var paciente = _pacienteService.FindById(id);
+                var obj = _pacienteService.FindById(id);
 
-                if (obj == null)
-                {
-                    return RedirectToAction(nameof(Error),
-                    new { message = "Id não encontrado" });
-                }
-
-                paciente.Endereco = obj.Endereco;
-
-                _pacienteService.Update(paciente);
+                _pacienteService.UpdateData(obj, viewModel);
+                _pacienteService.Update(obj);
                 return RedirectToAction(nameof(Index));
             }
             catch (ApplicationException e)

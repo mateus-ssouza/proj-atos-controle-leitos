@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProjetoFinal.Data;
 using ProjetoFinal.Models;
+using ProjetoFinal.Models.ViewModels;
 using ProjetoFinal.Services.Exceptions;
 
 namespace ProjetoFinal.Services
@@ -56,6 +57,17 @@ namespace ProjetoFinal.Services
             {
                 throw new DbConcurrencyException(e.Message);
             } 
+        }
+
+        public void UpdateData(Paciente _old, PacienteViewModel _new)
+        {
+            _old.Nome = _new.Paciente.Nome;
+            _old.DataNascimento = _new.Paciente.DataNascimento;
+            _old.Cpf = _new.Paciente.Cpf;
+            _old.Rg = _new.Paciente.Rg;
+            _old.Email = _new.Paciente.Email;
+            _old.Telefone = _new.Paciente.Telefone;
+            _old.Endereco = _new.Endereco;
         }
     }
 }
