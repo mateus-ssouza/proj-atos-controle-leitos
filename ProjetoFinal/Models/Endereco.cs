@@ -7,6 +7,7 @@
         public string Cidade { get; set; }
         public string Bairro { get; set; }
         public string Cep { get; set; }
+        public string Rua { get; set; }
         public string Numero { get; set; }
 
         public int IdPaciente { get; set; }
@@ -14,13 +15,14 @@
 
         public Endereco() { }
 
-        public Endereco(int id, string estado, string cidade, string bairro, string cep, string numero, Paciente paciente)
+        public Endereco(int id, string estado, string cidade, string bairro, string cep, string rua, string numero, Paciente paciente)
         {
             Id = id;
             Estado = estado;
             Cidade = cidade;
             Bairro = bairro;
             Cep = cep;
+            Rua = rua;
             Numero = numero;
             Paciente = paciente;
         }
