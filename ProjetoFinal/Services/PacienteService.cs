@@ -22,5 +22,17 @@ namespace ProjetoFinal.Services
             _contexto.Add(obj);
             _contexto.SaveChanges();
         }
+
+        public Paciente FindById(int id)
+        {
+            return _contexto.Paciente.FirstOrDefault(obj => obj.Id == id);
+        }
+
+        public void Remove(int id)
+        {
+            var obj = _contexto.Paciente.Find(id);
+            _contexto.Paciente.Remove(obj);
+            _contexto.SaveChanges();
+        }
     }
 }
