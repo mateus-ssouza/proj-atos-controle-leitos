@@ -18,9 +18,9 @@ namespace ProjetoFinal.Controllers
             _enderecoService = enderecoServico;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var list = _pacienteService.FindAll();
+            var list = await _pacienteService.FindAllAsync();
             return View(list);
         }
 
@@ -33,25 +33,20 @@ namespace ProjetoFinal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(PacienteViewModel pacienteViewModel)
+        public async Task<IActionResult> Create(PacienteViewModel pacienteViewModel)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(pacienteViewModel);
-            }
-
             var paciente = pacienteViewModel.Paciente;
 
             var endereco = pacienteViewModel.Endereco;
             endereco.Paciente = pacienteViewModel.Paciente;
 
-            _pacienteService.Insert(paciente);
-            _enderecoService.Insert(endereco);
+            await _pacienteService.InsertAsync(paciente);
+            await _enderecoService.InsertAsync(endereco);
 
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -59,7 +54,7 @@ namespace ProjetoFinal.Controllers
                     new {message = "Id não fornecido"});
             }
 
-            var obj = _pacienteService.FindById(id.Value);
+            var obj = await _pacienteService.FindByIdAsync(id.Value);
             
             if (obj == null)
             {
@@ -72,13 +67,13 @@ namespace ProjetoFinal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _pacienteService.Remove(id);
+            await _pacienteService.RemoveAsync(id);
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
@@ -86,7 +81,7 @@ namespace ProjetoFinal.Controllers
                     new { message = "Id não fornecido" });
             }
 
-            var obj = _pacienteService.FindById(id.Value);
+            var obj = await _pacienteService.FindByIdAsync(id.Value);
 
             if (obj == null)
             {
@@ -97,7 +92,7 @@ namespace ProjetoFinal.Controllers
             return View(obj);
         }
 
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
@@ -105,7 +100,7 @@ namespace ProjetoFinal.Controllers
                     new { message = "Id não fornecido" });
             }
 
-            var obj = _pacienteService.FindById(id.Value);
+            var obj = await _pacienteService.FindByIdAsync(id.Value);
 
             if (obj == null)
             {
@@ -124,13 +119,8 @@ namespace ProjetoFinal.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, PacienteViewModel viewModel)
+        public async Task<IActionResult> Edit(int id, PacienteViewModel viewModel)
         {
-
-            if (!ModelState.IsValid)
-            {
-                return View(viewModel);
-            }
 
             if (id != viewModel.Paciente.Id)
             {
@@ -140,10 +130,9 @@ namespace ProjetoFinal.Controllers
 
             try
             {
-                var obj = _pacienteService.FindById(id);
-
+                var obj = await _pacienteService.FindByIdAsync(id);
                 _pacienteService.UpdateData(obj, viewModel);
-                _pacienteService.Update(obj);
+                await _pacienteService.UpdateAsync(obj);
                 return RedirectToAction(nameof(Index));
             }
             catch (ApplicationException e)

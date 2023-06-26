@@ -14,22 +14,22 @@ namespace ProjetoFinal.Services
             _contexto = contexto;
         }
 
-        public void Insert(Endereco obj)
+        public async Task InsertAsync(Endereco obj)
         {
             _contexto.Add(obj);
-            _contexto.SaveChanges();
+            await _contexto.SaveChangesAsync();
         }
 
-        public Endereco FindById(int id)
+        public async Task<Endereco> FindByIdAsync(int id)
         {
-            return _contexto.Endereco.FirstOrDefault(obj => obj.Id == id);
+            return await _contexto.Endereco.FirstOrDefaultAsync(obj => obj.Id == id);
         }
 
-        public void Remove(int id)
+        public async Task RemoveAsync(int id)
         {
-            var obj = _contexto.Endereco.Find(id);
+            var obj = await _contexto.Endereco.FindAsync(id);
             _contexto.Endereco.Remove(obj);
-            _contexto.SaveChanges();
+            await _contexto.SaveChangesAsync();
         }
     }
 }

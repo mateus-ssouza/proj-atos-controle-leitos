@@ -15,35 +15,37 @@ namespace ProjetoFinal.Services
             _contexto = contexto;
         }
 
-        public List<Paciente> FindAll()
+        public async Task<List<Paciente>> FindAllAsync()
         {
-            return _contexto.Paciente.ToList();
+            return await _contexto.Paciente.ToListAsync();
         }
 
-        public void Insert(Paciente obj)
+        public async Task InsertAsync(Paciente obj)
         {
             _contexto.Add(obj);
-            _contexto.SaveChanges();
+            await _contexto.SaveChangesAsync();
         }
 
-        public Paciente FindById(int id)
+        public async Task<Paciente> FindByIdAsync(int id)
         {
-            return _contexto.Paciente
+            return await _contexto.Paciente
                 .Include(obj => obj.Endereco)
-                .FirstOrDefault(obj => obj.Id == id);
+                .FirstOrDefaultAsync(obj => obj.Id == id);
         }
 
-        public void Remove(int id)
+        public async Task RemoveAsync(int id)
         {
-            var obj = _contexto.Paciente.Find(id);
+            var obj =  await _contexto.Paciente.FindAsync(id);
             _contexto.Paciente.Remove(obj);
-            _contexto.SaveChanges();
+            await _contexto.SaveChangesAsync();
         }
 
-        public void Update(Paciente obj)
+        public async Task UpdateAsync(Paciente obj)
         {
+            bool existeAlgum = await _contexto.Paciente.AnyAsync(x => x.Id == obj.Id);
+
             // Verificar se não existe o Paciente no banco
-            if (!_contexto.Paciente.Any(x => x.Id == obj.Id))
+            if (!existeAlgum)
             {
                 throw new NotFoundException("Id não encontrado!");
             }
@@ -51,7 +53,7 @@ namespace ProjetoFinal.Services
             try
             {
                 _contexto.Update(obj);
-                _contexto.SaveChanges();
+                await _contexto.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException e)
             {

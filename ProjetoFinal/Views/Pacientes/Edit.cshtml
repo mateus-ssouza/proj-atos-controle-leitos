@@ -18,23 +18,26 @@
             <input type="hidden" asp-for="Paciente.Id" />
             <div class="form-group">
                 <label asp-for="Paciente.Nome" class="form-label"></label>
-                <input asp-for="Paciente.Nome" class="form-control" readonly />
+                <input asp-for="Paciente.Nome" class="form-control"  />
+                <span asp-validation-for="Paciente.Nome" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Paciente.DataNascimento" class="form-label"></label>
-                <input asp-for="Paciente.DataNascimento" class="form-control" readonly />
-                
+                <input asp-for="Paciente.DataNascimento" class="form-control" />
+                <span asp-validation-for="Paciente.DataNascimento" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Paciente.Cpf" class="form-label"></label>
-                <input asp-for="Paciente.Cpf" class="form-control" readonly />
+                <input asp-for="Paciente.Cpf" class="form-control" />
+                <span asp-validation-for="Paciente.Cpf" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Paciente.Rg" class="form-label"></label>
-                <input asp-for="Paciente.Rg" class="form-control" readonly />
+                <input asp-for="Paciente.Rg" class="form-control"/>
+                <span asp-validation-for="Paciente.Rg" class="text-danger"></span>
             </div>
 
             <div class="form-group">
