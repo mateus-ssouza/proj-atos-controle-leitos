@@ -33,6 +33,17 @@ namespace ProjetoFinal.Services
                 .FirstOrDefaultAsync(obj => obj.Id == id);
         }
 
+        public async Task<List<Paciente>> FindPacientesSemSolicitacao()
+        {
+            // Realiza a consulta para encontrar os pacientes sem solicitação
+            var  list = await _contexto.Paciente
+                .Where(p => p.Solicitacao == null) // Verifica se o paciente não possui nenhuma solicitação
+                .ToListAsync();
+
+            return list;
+        }
+
+
         public async Task RemoveAsync(int id)
         {
             var obj =  await _contexto.Paciente.FindAsync(id);

@@ -12,6 +12,7 @@ namespace ProjetoFinal.Data
 
         public DbSet<Paciente> Paciente { get; set; }
         public DbSet<Endereco> Endereco { get; set; }
+        public DbSet<Solicitacao> Solicitacao { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -19,6 +20,11 @@ namespace ProjetoFinal.Data
                 .HasOne(p => p.Endereco)
                 .WithOne(e => e.Paciente)
                 .HasForeignKey<Endereco>(e => e.IdPaciente);
+
+            modelBuilder.Entity<Paciente>()
+                .HasOne(p => p.Solicitacao)
+                .WithOne(s => s.Paciente)
+                .HasForeignKey<Solicitacao>(s => s.IdPaciente);
         }
     }
 }

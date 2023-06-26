@@ -38,10 +38,11 @@ namespace ProjetoFinal.Models
             ErrorMessage = "{0} insira os {1} caracteres.")]
         public string Telefone { get; set; }
         public Endereco Endereco { get; set; }
+        public Solicitacao Solicitacao { get; set; }
 
         public Paciente() { }
 
-        public Paciente(int id, string nome, DateTime dataNascimento, string cpf, string rg, string email, string telefone, Endereco endereco)
+        public Paciente(int id, string nome, DateTime dataNascimento, string cpf, string rg, string email, string telefone, Endereco endereco, Solicitacao solicitacao)
         {
             Id = id;
             Nome = nome;
@@ -51,6 +52,7 @@ namespace ProjetoFinal.Models
             Email = email;
             Telefone = telefone;
             Endereco = endereco;
+            Solicitacao = solicitacao;
         }
     }
 }

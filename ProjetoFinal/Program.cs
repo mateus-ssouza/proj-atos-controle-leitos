@@ -13,6 +13,7 @@ builder.Services.AddDbContext<Contexto>(options =>
 // Adicionando os servicos na injecao de dependencias
 builder.Services.AddScoped<PacienteService>();
 builder.Services.AddScoped<EnderecoService>();
+builder.Services.AddScoped<SolicitacaoService>();
 
 var app = builder.Build();
 
