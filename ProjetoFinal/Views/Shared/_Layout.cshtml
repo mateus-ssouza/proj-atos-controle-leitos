@@ -48,16 +48,35 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" asp-append-version="true"></script>
-    
+
     <script>
         // Função para a máscara do CPF
-        $(document).ready(function() {
-        $('.cpf').mask('000.000.000-00');
-        $('.cep').mask('00000-000');
-        $('.rg').mask('0.000.000');
-        $('.telefone').mask('(00) 00000-0000');
+        $(document).ready(function () {
+            $('.cpf').mask('000.000.000-00');
+            $('.cep').mask('00000-000');
+            $('.rg').mask('0.000.000');
+            $('.telefone').mask('(00) 00000-0000');
         });
-  </script>
+
+        function consultarCEP() {
+            var cep = $('#cepInput').val(); // Obtém o valor do campo de input do CEP
+
+            // Realiza a requisição AJAX para a API do Correios
+            $.ajax({
+                url: 'https://viacep.com.br/ws/' + cep + '/json/',
+                type: 'GET',
+                success: function (data) {
+                    // Preenche os campos com os dados retornados pela API
+                    $('#rua').val(data.logradouro);
+                    $('#bairro').val(data.bairro);
+                    $('#cidade').val(data.localidade);
+                    $('#estado').val(data.uf);
+                } 
+            });
+        }
+
+        $('#cepInput').on('blur', consultarCEP);
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

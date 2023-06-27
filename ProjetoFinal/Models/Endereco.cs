@@ -19,7 +19,7 @@ namespace ProjetoFinal.Models
 
 
         [Required(ErrorMessage = "O campo {0} é requerido")]
-        [StringLength(40, MinimumLength = 3,
+        [StringLength(40, MinimumLength = 2,
             ErrorMessage = "{0} deve ter entre {2} e {1} caracteres")]
         public string Bairro { get; set; }
 
