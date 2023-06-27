@@ -1,0 +1,73 @@
+﻿@using ProjetoFinal.Models.Enums
+
+@model ProjetoFinal.Models.Solicitacao
+
+@{
+    ViewData["Title"] = "Edição";
+    ViewData["label_paciente"] = "Paciente";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row form-control">
+
+    <h4>Solicitação</h4>
+
+    <hr />
+
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-group">
+                <label class="form-label">@ViewData["label_paciente"]</label>
+                <input asp-for="Paciente.Nome" class="form-control" disabled/>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Motivo" class="form-label"></label>
+                <input asp-for="Motivo" class="form-control" />
+                <span asp-validation-for="Motivo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Prioridade" class="form-label"></label>
+                <select asp-for="Prioridade" class="form-control">
+                    <option value="">Selecione a prioridade</option>
+                    @foreach (var item in Enum.GetValues(typeof(SolicitacaoPrioridade)))
+                    {
+                        <option value="@item">@item</option>
+                    }
+                </select>
+                <span asp-validation-for="Prioridade" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="NomeMedico" class="form-label"></label>
+                <input asp-for="NomeMedico" class="form-control" />
+                <span asp-validation-for="NomeMedico" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="NomeEnfermeiro" class="form-label"></label>
+                <input asp-for="NomeEnfermeiro" class="form-control" />
+                <span asp-validation-for="NomeEnfermeiro" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+
+                <label asp-for="Observacoes" class="form-label"></label>
+                <textarea asp-for="Observacoes" class="form-control" rows="4"></textarea>
+
+            </div>
+
+            <br />
+            <div>
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+            </div>
+        </form>
+    </div>
+</div>

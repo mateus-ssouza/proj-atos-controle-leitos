@@ -87,6 +87,55 @@ namespace ProjetoFinal.Controllers
             return View(obj);
         }
 
+        public async Task<IActionResult> Edit(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction(nameof(Error),
+                    new { message = "Id não fornecido" });
+            }
+
+            var obj = await _solicitacaoService.FindByIdAsync(id.Value);
+
+            if (obj == null)
+            {
+                return RedirectToAction(nameof(Error),
+                     new { message = "Id não encontrado" });
+            }
+
+            /*var viewModel = new SolicitacaoViewModel
+            {
+                Solicitacao = obj
+            };*/
+
+            return View(obj);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, Solicitacao solicitacao)
+        {
+
+            if (id != solicitacao.Id)
+            {
+                return RedirectToAction(nameof(Error),
+                    new { message = "Ids não correspondem" });
+            }
+
+            try
+            {
+                var obj = await _solicitacaoService.FindByIdAsync(id);
+                _solicitacaoService.UpdateData(obj, solicitacao);
+                await _solicitacaoService.UpdateAsync(obj);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (ApplicationException e)
+            {
+                return RedirectToAction(nameof(Error),
+                    new { message = e.Message });
+            }
+        }
+
         public IActionResult Error(string message)
         {
             var viewModel = new ErrorViewModel

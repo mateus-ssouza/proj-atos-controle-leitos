@@ -108,7 +108,7 @@ namespace ProjetoFinal.Controllers
                      new { message = "Id não encontrado" });
             }
 
-            PacienteViewModel viewModel = new PacienteViewModel
+            var viewModel = new PacienteViewModel
             {
                 Paciente = obj,
                 Endereco = obj.Endereco
