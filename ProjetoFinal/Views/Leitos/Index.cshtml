@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Leito>
+
+@{
+    ViewData["Title"] = "Leitos";
+    ViewData["th_responsavel"] = "Responsável";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-dark">Novo</a>
+</p>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr class="table-success">
+            <th>
+                #@Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Codigo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TipoLeito)
+            </th>
+            <th>
+                @ViewData["th_responsavel"]
+            </th>
+            <th>
+                Ações
+            </th>   
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Codigo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TipoLeito)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Solicitacao.NomeMedico)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="icon-link icon-link-hover">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.Id" class="icon-link icon-link-hover">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="icon-link icon-link-hover">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

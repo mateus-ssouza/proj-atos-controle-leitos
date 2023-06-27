@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProjetoFinal.Data;
 using ProjetoFinal.Models;
-using ProjetoFinal.Models.ViewModels;
 using ProjetoFinal.Services.Exceptions;
 
 namespace ProjetoFinal.Services
@@ -68,6 +67,7 @@ namespace ProjetoFinal.Services
         {
             _old.Motivo = _new.Motivo;
             _old.Prioridade = _new.Prioridade;
+            _old.TipoLeito = _new.TipoLeito;
             _old.NomeMedico = _new.NomeMedico;
             _old.NomeEnfermeiro = _new.NomeEnfermeiro;
             _old.Observacoes = _new.Observacoes;

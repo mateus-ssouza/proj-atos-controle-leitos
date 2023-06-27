@@ -35,6 +35,8 @@ namespace ProjetoFinal.Models
             ErrorMessage = "{0} deve ter entre {2} e {1} caracteres")]
         public string Rua { get; set; }
 
+        public string? Complemento { get; set; }
+
         [Required(ErrorMessage = "O campo {0} é requerido")]
         [StringLength(8)]
         public string Numero { get; set; }
@@ -44,7 +46,7 @@ namespace ProjetoFinal.Models
 
         public Endereco() { }
 
-        public Endereco(int id, string estado, string cidade, string bairro, string cep, string rua, string numero, Paciente paciente)
+        public Endereco(int id, string estado, string cidade, string bairro, string cep, string rua, string? complemento, string numero, Paciente paciente)
         {
             Id = id;
             Estado = estado;
@@ -52,6 +54,7 @@ namespace ProjetoFinal.Models
             Bairro = bairro;
             Cep = cep;
             Rua = rua;
+            Complemento = complemento;
             Numero = numero;
             Paciente = paciente;
         }

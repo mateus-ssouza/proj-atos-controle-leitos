@@ -44,6 +44,17 @@
                 <span asp-validation-for="Solicitacao.Prioridade" class="text-danger"></span>
             </div>
 
+            <div class="form-group">
+                <label asp-for="Solicitacao.TipoLeito" class="form-label"></label>
+                <select asp-for="Solicitacao.TipoLeito" class="form-control">
+                    <option value="">Selecione tipo de leito</option>
+                    @foreach (var item in Enum.GetValues(typeof(TipoLeito)))
+                    {
+                        <option value="@item">@item</option>
+                    }
+                </select>
+                <span asp-validation-for="Solicitacao.TipoLeito" class="text-danger"></span>
+            </div>
 
             <div class="form-group">
                 <label asp-for="Solicitacao.NomeMedico" class="form-label"></label>

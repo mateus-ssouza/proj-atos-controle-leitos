@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjetoFinal.Data;
 
@@ -11,9 +12,11 @@ using ProjetoFinal.Data;
 namespace ProjetoFinal.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20230627195406_CreateLeitoEntity")]
+    partial class CreateLeitoEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,24 +85,20 @@ namespace ProjetoFinal.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Codigo")
+                    b.Property<int>("IdSolicitacao")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Numero")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("IdSolicitacao")
-                        .HasColumnType("int");
-
                     b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TipoLeito")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
                     b.HasIndex("IdSolicitacao")
-                        .IsUnique()
-                        .HasFilter("[IdSolicitacao] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Leito");
                 });
@@ -187,9 +186,6 @@ namespace ProjetoFinal.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<int>("TipoLeito")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("IdPaciente")
@@ -213,7 +209,9 @@ namespace ProjetoFinal.Migrations
                 {
                     b.HasOne("ProjetoFinal.Models.Solicitacao", "Solicitacao")
                         .WithOne("Leito")
-                        .HasForeignKey("ProjetoFinal.Models.Leito", "IdSolicitacao");
+                        .HasForeignKey("ProjetoFinal.Models.Leito", "IdSolicitacao")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Solicitacao");
                 });

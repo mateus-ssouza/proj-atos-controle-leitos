@@ -14,6 +14,7 @@ builder.Services.AddDbContext<Contexto>(options =>
 builder.Services.AddScoped<PacienteService>();
 builder.Services.AddScoped<EnderecoService>();
 builder.Services.AddScoped<SolicitacaoService>();
+builder.Services.AddScoped<LeitoService>();
 
 var app = builder.Build();
 

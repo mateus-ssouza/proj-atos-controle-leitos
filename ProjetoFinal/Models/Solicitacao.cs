@@ -23,7 +23,9 @@ namespace ProjetoFinal.Models
 
         [Required(ErrorMessage = "{0} é requerida")]
         public SolicitacaoPrioridade Prioridade { get; set; }
-        
+
+        public TipoLeito TipoLeito { get; set; }
+
         [DefaultValue(0)]
         public SolicitacaoStatus Status { get; set; }
 
@@ -48,20 +50,24 @@ namespace ProjetoFinal.Models
         public int IdPaciente { get; set; }
         public Paciente Paciente { get; set; }
 
+        public Leito Leito { get; set; }
+
         public Solicitacao() {}
 
-        public Solicitacao(int id, DateTime dataSolicitacao, DateTime dataRegulacao, string motivo, SolicitacaoPrioridade prioridade, SolicitacaoStatus status, string nomeMedico, string nomeEnfermeiro, string observacoes, Paciente paciente)
+        public Solicitacao(int id, DateTime dataSolicitacao, DateTime? dataRegulacao, string motivo, SolicitacaoPrioridade prioridade, TipoLeito tipoLeito, SolicitacaoStatus status, string nomeMedico, string nomeEnfermeiro, string? observacoes, Paciente paciente, Leito leito)
         {
             Id = id;
             DataSolicitacao = dataSolicitacao;
             DataRegulacao = dataRegulacao;
             Motivo = motivo;
             Prioridade = prioridade;
+            TipoLeito = tipoLeito;
             Status = status;
             NomeMedico = nomeMedico;
             NomeEnfermeiro = nomeEnfermeiro;
             Observacoes = observacoes;
             Paciente = paciente;
+            Leito = leito;
         }
     }
 }
