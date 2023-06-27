@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Solicitações";
+    ViewData["th_paciente"] = "Paciente";
 }
 
 <h2>@ViewData["Title"]</h2>
@@ -14,7 +15,10 @@
     <thead>
         <tr class="table-success">
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                #@Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @ViewData["th_paciente"]
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.NomeMedico)
@@ -39,6 +43,9 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Paciente.Nome)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.NomeMedico)
