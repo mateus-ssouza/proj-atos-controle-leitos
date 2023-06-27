@@ -18,11 +18,13 @@ namespace ProjetoFinal.Models
         public DateTime DataNascimento { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é requerido")]
+        [RegularExpression("^[0-9]+$", ErrorMessage = "Caracteres inválidos")]
         [StringLength(11, MinimumLength = 11,
             ErrorMessage = "{0} insira os {1} caracteres.")]
         public string Cpf { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é requerido")]
+        [RegularExpression("^[0-9]+$", ErrorMessage = "Caracteres inválidos")]
         [StringLength(7, MinimumLength = 7,
             ErrorMessage = "{0} insira os {1} caracteres.")]
         public string Rg { get; set; }
@@ -34,6 +36,7 @@ namespace ProjetoFinal.Models
         public string Email { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é requerido")]
+        [RegularExpression("^[0-9]+$", ErrorMessage = "Caracteres inválidos")]
         [StringLength(11, MinimumLength = 11,
             ErrorMessage = "{0} insira os {1} caracteres.")]
         public string Telefone { get; set; }

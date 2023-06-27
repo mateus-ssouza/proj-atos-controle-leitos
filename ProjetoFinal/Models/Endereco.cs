@@ -7,6 +7,7 @@ namespace ProjetoFinal.Models
         public int Id { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é requerido")]
+        [RegularExpression("^[A-Za-z]+$", ErrorMessage="Caracteres inválidos")]
         [StringLength(2, MinimumLength = 2,
             ErrorMessage = "{0} deve ter exatamente {1} caracteres.")]
         public string Estado { get; set; }
@@ -24,6 +25,7 @@ namespace ProjetoFinal.Models
 
 
         [Required(ErrorMessage = "O campo {0} é requerido")]
+        [RegularExpression("^[0-9]+$", ErrorMessage = "Caracteres inválidos")]
         [StringLength(8, MinimumLength = 8,
             ErrorMessage = "{0} deve ter {1} caracteres")]
         public string Cep { get; set; }

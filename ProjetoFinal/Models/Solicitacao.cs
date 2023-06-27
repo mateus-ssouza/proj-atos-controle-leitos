@@ -15,21 +15,36 @@ namespace ProjetoFinal.Models
         [Display(Name = "Data da Regulação")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? DataRegulacao { get; set; }
+
+        [Required(ErrorMessage = "O campo {0} é requerido")]
+        [StringLength(60, MinimumLength = 3,
+            ErrorMessage = "{0} deve ter entre {2} e {1} caracteres.")]
         public String Motivo { get; set; }
+
+        [Required(ErrorMessage = "{0} é requerida")]
         public SolicitacaoPrioridade Prioridade { get; set; }
         
         [DefaultValue(0)]
         public SolicitacaoStatus Status { get; set; }
 
+        [Required(ErrorMessage = "O campo {0} é requerido")]
+        [StringLength(40, MinimumLength = 3,
+            ErrorMessage = "{0} deve ter entre {2} e {1} caracteres.")]
         [Display(Name = "Médico")]
         public String NomeMedico { get; set; }
 
+        [Required(ErrorMessage = "O campo {0} é requerido")]
+        [StringLength(40, MinimumLength = 3,
+            ErrorMessage = "{0} deve ter entre {2} e {1} caracteres.")]
         [Display(Name = "Enfermeiro")]
         public String NomeEnfermeiro { get; set; }
 
         [Display(Name = "Observações")]
+        [StringLength(maximumLength:300)]
         public String? Observacoes { get; set; }
 
+        [Display(Name = "Paciente")]
+        [Required(ErrorMessage = "{0} é requerido")]
         public int IdPaciente { get; set; }
         public Paciente Paciente { get; set; }
 
