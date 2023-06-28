@@ -18,6 +18,15 @@
             <dd>
                 @Html.DisplayFor(model => model.DataSolicitacao)
             </dd>
+            @if (Model.DataRegulacao == null)
+            {
+                <dt>
+                    @Html.DisplayNameFor(model => model.DataRegulacao)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DataRegulacao)
+                </dd>
+            }
             <dt>
                 @ViewData["th_paciente"]
             </dt>

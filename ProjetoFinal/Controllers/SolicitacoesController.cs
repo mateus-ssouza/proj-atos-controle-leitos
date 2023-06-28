@@ -103,11 +103,6 @@ namespace ProjetoFinal.Controllers
                      new { message = "Id não encontrado" });
             }
 
-            /*var viewModel = new SolicitacaoViewModel
-            {
-                Solicitacao = obj
-            };*/
-
             return View(obj);
         }
 

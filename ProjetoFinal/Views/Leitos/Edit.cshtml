@@ -1,0 +1,59 @@
+﻿@using ProjetoFinal.Models.Enums
+
+@model ProjetoFinal.Models.Leito
+
+@{
+    ViewData["Title"] = "Edição";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div class="row form-control">
+
+    <h4>Leito</h4>
+
+    <hr />
+
+    <div class="col-md-4">
+        <form asp-action="Edit">
+
+            <input type="hidden" asp-for="Id" />
+
+            <div class="form-group">
+                <label asp-for="Codigo" class="form-label"></label>
+                <input asp-for="Codigo" class="form-control" />
+                <span asp-validation-for="Codigo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Status" class="form-label"></label>
+                <select asp-for="Status" class="form-control">
+                    <option value="">Selecione o status do leito</option>
+                    @foreach (var item in Enum.GetValues(typeof(StatusLeito)))
+                    {
+                        <option value="@item">@item</option>
+                    }
+                </select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="TipoLeito" class="form-label"></label>
+                <select asp-for="TipoLeito" class="form-control">
+                    <option value="">Selecione o tipo do leito</option>
+                    @foreach (var item in Enum.GetValues(typeof(TipoLeito)))
+                    {
+                        <option value="@item">@item</option>
+                    }
+                </select>
+                <span asp-validation-for="TipoLeito" class="text-danger"></span>
+            </div>
+
+            <br />
+            <div>
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+            </div>
+        </form>
+    </div>
+</div>

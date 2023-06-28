@@ -23,7 +23,9 @@ namespace ProjetoFinal.Models
 
         [Required(ErrorMessage = "{0} é requerida")]
         public SolicitacaoPrioridade Prioridade { get; set; }
-
+        
+        [Required(ErrorMessage = "{0} é requerido")]
+        [Display(Name = "Tipo do Leito")]
         public TipoLeito TipoLeito { get; set; }
 
         [DefaultValue(0)]

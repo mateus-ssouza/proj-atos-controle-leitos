@@ -4,6 +4,6 @@
     {
         LIVRE = 0,
         OCUPADO = 1,
-        BROQUEADO = 2
+        BLOQUEADO = 2
     }
 }
