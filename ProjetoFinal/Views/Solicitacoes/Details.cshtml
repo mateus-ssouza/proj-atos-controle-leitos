@@ -29,6 +29,16 @@
                     @Html.DisplayFor(model => model.DataRegulacao)
                 </dd>
             }
+            @if (Model.DataFinalizacao != null)
+            {
+                <dt>
+                    @Html.DisplayNameFor(model => model.DataFinalizacao)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DataFinalizacao)
+                </dd>
+            }
+
             <dt>
                 @ViewData["th_paciente"]
             </dt>
@@ -110,7 +120,10 @@
     }
 
     <br />
-    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a>
+    @if (Model.Status != SolicitacaoStatus.FINALIZADA)
+    {
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a>
+    }
     @if (Model.Status == SolicitacaoStatus.SOLICITADO)
     {
         <a asp-action="Reserve" asp-route-id="@Model.Id" class="btn btn-warning">Reservar</a>

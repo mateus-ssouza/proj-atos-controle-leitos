@@ -185,12 +185,6 @@ namespace ProjetoFinal.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Relocate(int id, SolicitacaoViewModel viewModel)
         {
-            /*if (id != viewModel.Solicitacao.IdLeito)
-            {
-                return RedirectToAction(nameof(Error),
-                    new { message = "Ids não correspondem " + id + " " + viewModel.Solicitacao.IdLeito });
-            }*/
-
             try
             {
                 var solicitacao = await _solicitacaoService.FindByIdLeitoAsync(id);
@@ -207,6 +201,70 @@ namespace ProjetoFinal.Controllers
                 await _leitoService.UpdateAsync(novoLeitoDaSolicitacao);
                 await _leitoService.UpdateAsync(antigoLeitoDaSolicitacao);
 
+                return RedirectToAction(nameof(Index));
+            }
+            catch (ApplicationException e)
+            {
+                return RedirectToAction(nameof(Error),
+                    new { message = e.Message });
+            }
+        }
+
+        public async Task<IActionResult> Finalize(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction(nameof(Error),
+                    new { message = "Id não fornecido" });
+            }
+
+            var leito = await _leitoService.FindByIdAsync(id.Value);
+
+            if (leito == null)
+            {
+                return RedirectToAction(nameof(Error),
+                     new { message = "Id não encontrado" });
+            }
+
+            var solicitacao = await _solicitacaoService.FindByIdAsync(leito.Solicitacao.Id);
+
+            if (solicitacao == null)
+            {
+                return RedirectToAction(nameof(Error),
+                     new { message = "Id não encontrado" });
+            }
+
+
+            var viewModel = new LeitoViewModel
+            {
+                Leito = leito,
+                Solicitacao = solicitacao
+            };
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Finalize(int id, LeitoViewModel viewModel)
+        {
+            if (id != viewModel.Leito.Id)
+            {
+                return RedirectToAction(nameof(Error),
+                    new { message = "Ids não correspondem" });
+            }
+
+            try
+            {
+                var solicitacao = await _solicitacaoService.FindByIdLeitoAsync(id);
+                var leito = await _leitoService.FindByIdAsync(id);
+                
+                _solicitacaoService.FinalizarSolicitacao(solicitacao);
+                _leitoService.MudarStatusLeito(leito);
+
+                await _solicitacaoService.UpdateAsync(solicitacao);
+                await _leitoService.UpdateAsync(leito);
+     
                 return RedirectToAction(nameof(Index));
             }
             catch (ApplicationException e)

@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Solicitacao>
+﻿@using ProjetoFinal.Models.Enums
+
+@model IEnumerable<Solicitacao>
 
 @{
     ViewData["Title"] = "Solicitações";
@@ -61,10 +63,13 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.TipoLeito)
                 </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn-acoes btn-acoes-ini">
-                        <i class="fa-solid fa-pen"></i>
-                    </a>
+                <td>  
+                    @if (item.Status != SolicitacaoStatus.FINALIZADA)
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn-acoes btn-acoes-ini">
+                            <i class="fa-solid fa-pen"></i>
+                        </a>
+                    }
                     <a asp-action="Details" asp-route-id="@item.Id" class="btn-acoes btn-acoes-ini">
                         <i class="fa-solid fa-eye"></i>
                     </a>

@@ -16,6 +16,10 @@ namespace ProjetoFinal.Models
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime? DataRegulacao { get; set; }
 
+        [Display(Name = "Data da Finalização")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        public DateTime? DataFinalizacao { get; set; }
+
         [Required(ErrorMessage = "O campo {0} é requerido")]
         [StringLength(60, MinimumLength = 3,
             ErrorMessage = "{0} deve ter entre {2} e {1} caracteres.")]
@@ -58,11 +62,12 @@ namespace ProjetoFinal.Models
 
         public Solicitacao() {}
 
-        public Solicitacao(int id, DateTime dataSolicitacao, DateTime? dataRegulacao, string motivo, SolicitacaoPrioridade prioridade, TipoLeito tipoLeito, SolicitacaoStatus status, string nomeMedico, string nomeEnfermeiro, string? observacoes, Paciente paciente, Leito leito)
+        public Solicitacao(int id, DateTime dataSolicitacao, DateTime? dataRegulacao, DateTime? dataFinalizacao, string motivo, SolicitacaoPrioridade prioridade, TipoLeito tipoLeito, SolicitacaoStatus status, string nomeMedico, string nomeEnfermeiro, string? observacoes, Paciente paciente, Leito? leito)
         {
             Id = id;
             DataSolicitacao = dataSolicitacao;
             DataRegulacao = dataRegulacao;
+            DataFinalizacao = dataFinalizacao;
             Motivo = motivo;
             Prioridade = prioridade;
             TipoLeito = tipoLeito;

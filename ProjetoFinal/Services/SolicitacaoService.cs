@@ -104,5 +104,12 @@ namespace ProjetoFinal.Services
             _old.IdLeito = _new.Solicitacao.IdLeito;
             _old.Status = SolicitacaoStatus.REGULADO;
         }
+
+        public void FinalizarSolicitacao(Solicitacao solicitacao)
+        {
+            solicitacao.DataFinalizacao = DateTime.Now;
+            solicitacao.Status = SolicitacaoStatus.FINALIZADA;
+            solicitacao.IdLeito = null;
+        }
     }
 }

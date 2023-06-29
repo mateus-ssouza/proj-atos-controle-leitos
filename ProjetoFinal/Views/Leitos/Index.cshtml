@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Leito>
+﻿@using ProjetoFinal.Models.Enums
+
+@model IEnumerable<Leito>
 
 @{
     ViewData["Title"] = "Leitos";
@@ -63,9 +65,13 @@
                     <a asp-action="Details" asp-route-id="@item.Id" class="btn-acoes btn-acoes-ini">
                         <i class="fa-solid fa-eye"></i>
                     </a>
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn-acoes">
-                        <i class="fa-solid fa-trash"></i>
-                    </a>
+                    
+                    @if (item.Status != StatusLeito.OCUPADO)
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn-acoes">
+                            <i class="fa-solid fa-trash"></i>
+                        </a>
+                    }
                 </td>
             </tr>
         }

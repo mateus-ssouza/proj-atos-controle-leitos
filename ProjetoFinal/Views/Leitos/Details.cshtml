@@ -98,6 +98,7 @@
     @if (Model.Status == StatusLeito.OCUPADO)
     {
         <a asp-action="Relocate" asp-route-id="@Model.Id" class="btn btn-warning">Transferir</a>
+        <a asp-action="Finalize" asp-route-id="@Model.Id" class="btn btn-success">Finalizar</a>
     }
     <a asp-action="Index" class="btn btn-secondary">Voltar</a>
 </div>

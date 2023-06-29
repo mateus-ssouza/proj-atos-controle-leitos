@@ -1,0 +1,100 @@
+﻿@model ProjetoFinal.Models.ViewModels.LeitoViewModel
+
+@{
+    ViewData["Title"] = "Finalizar";
+    ViewData["label_paciente"] = "Paciente";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h4>Deseja realmente finalizar a solicitação ?</h4>
+
+<br />
+
+<div class="form-control">
+    <h5>Informações da solicitação</h5>
+    <hr />
+    <div class="form-control">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Solicitacao.DataSolicitacao)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Solicitacao.DataSolicitacao)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Solicitacao.DataRegulacao)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Solicitacao.DataRegulacao)
+            </dd>
+            <dt>
+                @ViewData["th_paciente"]
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Solicitacao.Paciente.Nome)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Solicitacao.Motivo)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Solicitacao.Motivo)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Solicitacao.Prioridade)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Solicitacao.Prioridade)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Solicitacao.NomeMedico)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Solicitacao.NomeMedico)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Solicitacao.NomeEnfermeiro)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Solicitacao.NomeEnfermeiro)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Solicitacao.Observacoes)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Solicitacao.Observacoes)
+            </dd>
+        </dl>
+    </div>
+    <br />
+    <h5>Leito atual</h5>
+    <hr />
+    <div class="form-control">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Leito.Codigo)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Leito.Codigo)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Leito.Status)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Leito.Status)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Leito.TipoLeito)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Leito.TipoLeito)
+            </dd>
+        </dl>
+    </div>
+    <br />
+    <form asp-action="Finalize">
+        <input type="hidden" asp-for="Leito.Id" />
+        <input type="submit" value="Finalizar" class="btn btn-success" />
+        <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+    </form>
+</div>
