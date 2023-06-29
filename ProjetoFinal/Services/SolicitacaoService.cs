@@ -38,6 +38,14 @@ namespace ProjetoFinal.Services
                 .FirstOrDefaultAsync(obj => obj.Id == id);
         }
 
+        public async Task<Solicitacao> FindByIdLeitoAsync(int id)
+        {
+            return await _contexto.Solicitacao
+                .Include(obj => obj.Paciente)
+                .Include(obj => obj.Leito)
+                .FirstOrDefaultAsync(obj => obj.IdLeito == id);
+        }
+
         public async Task RemoveAsync(int id)
         {
             var obj = await _contexto.Solicitacao.FindAsync(id);
@@ -84,6 +92,16 @@ namespace ProjetoFinal.Services
             UpdateData(_old, _new.Solicitacao);
             _old.IdLeito = _new.Solicitacao.IdLeito;
             _old.DataRegulacao = DateTime.Now;
+            _old.Status = SolicitacaoStatus.REGULADO;
+        }
+
+        public void TransferirSolicitacao(Solicitacao _old, SolicitacaoViewModel _new)
+        {
+            _new.Solicitacao.TipoLeito = _old.TipoLeito;
+            _new.Solicitacao.Prioridade = _old.Prioridade;
+
+            UpdateData(_old, _new.Solicitacao);
+            _old.IdLeito = _new.Solicitacao.IdLeito;
             _old.Status = SolicitacaoStatus.REGULADO;
         }
     }

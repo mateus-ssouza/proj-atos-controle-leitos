@@ -80,6 +80,35 @@
         </dl>
     </div>
 
+    @if (Model.Status == SolicitacaoStatus.REGULADO)
+    {
+        <br />
+        <h4>Informações do leito</h4>
+        <hr />
+        <div class="form-control">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Leito.Codigo)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Leito.Codigo)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Leito.Status)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Leito.Status)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Leito.TipoLeito)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Leito.TipoLeito)
+                </dd>
+            </dl>
+        </div>
+    }
+
     <br />
     <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a>
     @if (Model.Status == SolicitacaoStatus.SOLICITADO)

@@ -4,13 +4,15 @@
 
 @{
     ViewData["Title"] = "Reserva";
-    ViewData["th_paciente"] = "Paciente";
+    ViewData["label_paciente"] = "Paciente";
 }
 
 <h2>@ViewData["Title"]</h2>
 
 <div class="row form-control">
 
+    <h4>Informações da solicitação</h4>
+    <hr />
     <div>
         <form asp-action="Reserve">
 

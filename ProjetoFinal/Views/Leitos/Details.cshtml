@@ -1,4 +1,6 @@
-﻿@model ProjetoFinal.Models.Leito
+﻿@using ProjetoFinal.Models.Enums
+
+@model ProjetoFinal.Models.Leito
 
 @{
     ViewData["Title"] = "Detalhes";
@@ -32,7 +34,70 @@
         </dl>
     </div>
 
+    @if (Model.Status == StatusLeito.OCUPADO)
+    {
+        <br />
+        <h4>Informações da solicitação</h4>
+        <hr />
+        <div class="form-control">
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Solicitacao.DataSolicitacao)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Solicitacao.DataSolicitacao)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Solicitacao.DataRegulacao)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Solicitacao.DataRegulacao)
+                </dd>
+                <dt>
+                    @ViewData["th_paciente"]
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Solicitacao.Paciente.Nome)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Solicitacao.Motivo)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Solicitacao.Motivo)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Solicitacao.Prioridade)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Solicitacao.Prioridade)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Solicitacao.NomeMedico)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Solicitacao.NomeMedico)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Solicitacao.NomeEnfermeiro)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Solicitacao.NomeEnfermeiro)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Solicitacao.Observacoes)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Solicitacao.Observacoes)
+                </dd>
+            </dl>
+        </div>
+    }
+
     <br />
     <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a>
+    @if (Model.Status == StatusLeito.OCUPADO)
+    {
+        <a asp-action="Relocate" asp-route-id="@Model.Id" class="btn btn-warning">Transferir</a>
+    }
     <a asp-action="Index" class="btn btn-secondary">Voltar</a>
 </div>

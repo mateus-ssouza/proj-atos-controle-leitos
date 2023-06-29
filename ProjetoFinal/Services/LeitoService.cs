@@ -18,7 +18,8 @@ namespace ProjetoFinal.Services
         public async Task<List<Leito>> FindAllAsync()
         {
             return await _contexto.Leito
-                .Include(obj => obj.Solicitacao) 
+                .Include(obj => obj.Solicitacao)
+                .Include(obj => obj.Solicitacao.Paciente)
                 .ToListAsync();
         }
 
@@ -94,7 +95,8 @@ namespace ProjetoFinal.Services
 
         public void MudarStatusLeito(Leito obj)
         {
-            obj.Status = StatusLeito.OCUPADO;
+            obj.Status = obj.Status == StatusLeito.LIVRE ? 
+                StatusLeito.OCUPADO : StatusLeito.LIVRE;
         }
 
         public void UpdateData(Leito _old, Leito _new)
