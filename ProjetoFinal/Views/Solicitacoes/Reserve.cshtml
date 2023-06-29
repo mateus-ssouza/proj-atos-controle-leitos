@@ -3,38 +3,33 @@
 @model ProjetoFinal.Models.ViewModels.SolicitacaoViewModel
 
 @{
-    ViewData["Title"] = "Cadastro";
+    ViewData["Title"] = "Reserva";
+    ViewData["th_paciente"] = "Paciente";
 }
 
 <h2>@ViewData["Title"]</h2>
 
 <div class="row form-control">
 
-    <h4>Solicitação</h4>
+    <div>
+        <form asp-action="Reserve">
 
-    <hr />
-
-    <div class="col-md-4">
-        <form asp-action="Create">
+            <input type="hidden" asp-for="Solicitacao.Id" />
 
             <div class="form-group">
-                <label asp-for="Solicitacao.IdPaciente" class="form-label"></label>
-                <select asp-for="Solicitacao.IdPaciente" asp-items="@(new SelectList(Model.Pacientes, "Id",
-                "Nome"))" class="form-control form-select">
-                    <option value="">Selecione um paciente</option>
-                </select>
-                <span asp-validation-for="Solicitacao.IdPaciente" class="text-danger"></span>
+                <label class="form-label">@ViewData["label_paciente"]</label>
+                <input asp-for="Solicitacao.Paciente.Nome" class="form-control" readonly />
             </div>
 
             <div class="form-group">
                 <label asp-for="Solicitacao.Motivo" class="form-label"></label>
-                <input asp-for="Solicitacao.Motivo" class="form-control" />
+                <input asp-for="Solicitacao.Motivo" class="form-control" readonly />
                 <span asp-validation-for="Solicitacao.Motivo" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Solicitacao.Prioridade" class="form-label"></label>
-                <select asp-for="Solicitacao.Prioridade" class="form-control">
+                <select asp-for="Solicitacao.Prioridade" class="form-control" disabled>
                     <option value="">Selecione a prioridade</option>
                     @foreach (var item in Enum.GetValues(typeof(SolicitacaoPrioridade)))
                     {
@@ -46,7 +41,7 @@
 
             <div class="form-group">
                 <label asp-for="Solicitacao.TipoLeito" class="form-label"></label>
-                <select asp-for="Solicitacao.TipoLeito" class="form-control">
+                <select asp-for="Solicitacao.TipoLeito" class="form-control" disabled>
                     <option value="">Selecione tipo de leito</option>
                     @foreach (var item in Enum.GetValues(typeof(TipoLeito)))
                     {
@@ -58,31 +53,50 @@
 
             <div class="form-group">
                 <label asp-for="Solicitacao.NomeMedico" class="form-label"></label>
-                <input asp-for="Solicitacao.NomeMedico" class="form-control" />
+                <input asp-for="Solicitacao.NomeMedico" class="form-control" readonly />
                 <span asp-validation-for="Solicitacao.NomeMedico" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label asp-for="Solicitacao.NomeEnfermeiro" class="form-label"></label>
-                <input asp-for="Solicitacao.NomeEnfermeiro" class="form-control" />
+                <input asp-for="Solicitacao.NomeEnfermeiro" class="form-control" readonly />
                 <span asp-validation-for="Solicitacao.NomeEnfermeiro" class="text-danger"></span>
             </div>
 
             <div class="form-group">
+
                 <label asp-for="Solicitacao.Observacoes" class="form-label"></label>
-                <textarea asp-for="Solicitacao.Observacoes" class="form-control" rows="4"></textarea>
+                <textarea asp-for="Solicitacao.Observacoes" class="form-control" rows="4" readonly></textarea>
             </div>
 
             <br />
+
+            <h4>Leitos disponiveis</h4>
+
+            <div class="form-control">
+                <div class="form-group">
+                    <label asp-for="Solicitacao.IdLeito" class="form-label"></label>
+                    <select asp-for="Solicitacao.IdLeito" asp-items="@(new SelectList(Model.Leitos, "Id",
+                "Codigo"))" class="form-control form-select" required>
+                        <option value="">Selecione um leito</option>
+                    </select>
+                    @Html.ValidationMessageFor(model => model.Solicitacao.IdLeito, "* Leito é obrigatório.", new { @class = "text-danger" })
+                </div>
+                <br />
+            </div>
+
+            <br />
+
             <div>
-                <input type="submit" value="Salvar" class="btn btn-primary" />
+                <input type="submit" value="Confirmar" class="btn btn-primary" />
+                <a asp-action="Details" asp-route-id="@Model.Solicitacao.Id" class="btn btn-secondary">Voltar</a>
             </div>
         </form>
     </div>
 </div>
 
 @section Scripts
-{
+    {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }

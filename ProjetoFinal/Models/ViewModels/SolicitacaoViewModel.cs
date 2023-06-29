@@ -4,5 +4,6 @@
     {
         public Solicitacao Solicitacao { get; set; }
         public ICollection<Paciente> Pacientes { get; set; }
+        public ICollection<Leito> Leitos { get; set; }
     }
 }

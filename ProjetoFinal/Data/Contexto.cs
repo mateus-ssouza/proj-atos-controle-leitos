@@ -27,10 +27,10 @@ namespace ProjetoFinal.Data
                 .WithOne(s => s.Paciente)
                 .HasForeignKey<Solicitacao>(s => s.IdPaciente);
 
-            modelBuilder.Entity<Leito>()
-                .HasOne(l => l.Solicitacao)
-                .WithOne(s => s.Leito)
-                .HasForeignKey<Leito>(l => l.IdSolicitacao);
+            modelBuilder.Entity<Solicitacao>()
+                .HasOne(s => s.Leito)
+                .WithOne(l => l.Solicitacao)
+                .HasForeignKey<Solicitacao>(s => s.IdLeito);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProjetoFinal.Data;
 using ProjetoFinal.Models;
+using ProjetoFinal.Models.Enums;
 using ProjetoFinal.Services.Exceptions;
 
 namespace ProjetoFinal.Services
@@ -34,11 +35,40 @@ namespace ProjetoFinal.Services
                 .FirstOrDefaultAsync(obj => obj.Id == id);
         }
 
+        public async Task<List<Leito>> FindLeitosClinicosDisponiveis()
+        {
+            // Realiza a consulta para encontrar os leitos sem solicitação
+            var list = await _contexto.Leito
+                .Where(p => p.Solicitacao == null) // Verifica se o leito não possui nenhuma solicitação
+                .Where(p => p.TipoLeito == TipoLeito.CLINICO) // Verifica se o leito é tipo clinico
+                .ToListAsync();
+
+            return list;
+        }
+
+        public async Task<List<Leito>> FindLeitosCirurgicosDisponiveis()
+        {
+            // Realiza a consulta para encontrar os leitos sem solicitação
+            var list = await _contexto.Leito
+                .Where(p => p.Solicitacao == null) // Verifica se o leito não possui nenhuma solicitação
+                .Where(p => p.TipoLeito == TipoLeito.CIRURGICO) // Verifica se o leito é tipo cirurgico
+                .ToListAsync();
+
+            return list;
+        }
+
         public async Task RemoveAsync(int id)
         {
-            var obj = await _contexto.Leito.FindAsync(id);
-            _contexto.Leito.Remove(obj);
-            await _contexto.SaveChangesAsync();
+            try
+            {
+                var obj = await _contexto.Leito.FindAsync(id);
+                _contexto.Leito.Remove(obj);
+                await _contexto.SaveChangesAsync();
+            }
+            catch (DbUpdateException e)
+            {
+                throw new IntegrityException(e.Message);
+            }
         }
 
         public async Task UpdateAsync(Leito obj)
@@ -59,6 +89,20 @@ namespace ProjetoFinal.Services
             catch (DbUpdateConcurrencyException e)
             {
                 throw new DbConcurrencyException(e.Message);
+            }
+        }
+
+        public void MudarStatusLeito(Leito obj)
+        {
+            obj.Status = StatusLeito.OCUPADO;
+        }
+
+        public void UpdateData(Leito _old, Leito _new)
+        {
+            _old.Codigo = _new.Codigo;
+            if (_old.Status == StatusLeito.LIVRE)
+            {
+                _old.TipoLeito = _new.TipoLeito;
             }
         }
     }

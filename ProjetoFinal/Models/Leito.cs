@@ -7,16 +7,19 @@ namespace ProjetoFinal.Models
     {
         public int Id { get; set; }
 
-        [Display(Name = "Codigo da Sala")]
+        [Display(Name = "Código da Sala")]
+        [Required(ErrorMessage = "{0} é requerido")]
+        [StringLength(6, MinimumLength = 3,
+            ErrorMessage = "{0} deve ter entre {2} e {1} caracteres.")]
         public string Codigo { get; set; }
+
+        [Required(ErrorMessage = "{0} é requerido")]
         public StatusLeito Status { get; set; }
 
         [Required(ErrorMessage = "{0} é requerido")]
         [Display(Name = "Tipo do Leito")]
         public TipoLeito TipoLeito { get; set; }
 
-        [Display(Name = "Registro da Notificação")]
-        public int? IdSolicitacao { get; set; }
         public Solicitacao? Solicitacao { get; set; }
 
         public Leito() {}

@@ -3,7 +3,6 @@
     public enum StatusLeito : int
     {
         LIVRE = 0,
-        OCUPADO = 1,
-        BLOQUEADO = 2
+        OCUPADO = 1
     }
 }

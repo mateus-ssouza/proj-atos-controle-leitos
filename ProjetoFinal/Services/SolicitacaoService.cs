@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ProjetoFinal.Data;
 using ProjetoFinal.Models;
+using ProjetoFinal.Models.Enums;
+using ProjetoFinal.Models.ViewModels;
 using ProjetoFinal.Services.Exceptions;
 
 namespace ProjetoFinal.Services
@@ -32,6 +34,7 @@ namespace ProjetoFinal.Services
         {
             return await _contexto.Solicitacao
                 .Include(obj => obj.Paciente)
+                .Include(obj => obj.Leito)
                 .FirstOrDefaultAsync(obj => obj.Id == id);
         }
 
@@ -71,6 +74,17 @@ namespace ProjetoFinal.Services
             _old.NomeMedico = _new.NomeMedico;
             _old.NomeEnfermeiro = _new.NomeEnfermeiro;
             _old.Observacoes = _new.Observacoes;
+        }
+
+        public void RegularSolicitacao(Solicitacao _old, SolicitacaoViewModel _new)
+        {
+            _new.Solicitacao.TipoLeito = _old.TipoLeito;
+            _new.Solicitacao.Prioridade = _old.Prioridade;
+
+            UpdateData(_old, _new.Solicitacao);
+            _old.IdLeito = _new.Solicitacao.IdLeito;
+            _old.DataRegulacao = DateTime.Now;
+            _old.Status = SolicitacaoStatus.REGULADO;
         }
     }
 }

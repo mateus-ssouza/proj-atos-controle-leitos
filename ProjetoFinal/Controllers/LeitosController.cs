@@ -2,6 +2,7 @@
 using ProjetoFinal.Models;
 using ProjetoFinal.Models.ViewModels;
 using ProjetoFinal.Services;
+using ProjetoFinal.Services.Exceptions;
 using System.Diagnostics;
 
 namespace ProjetoFinal.Controllers
@@ -59,8 +60,17 @@ namespace ProjetoFinal.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            await _leitoService.RemoveAsync(id);
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                await _leitoService.RemoveAsync(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (IntegrityException)
+            {
+                return RedirectToAction(nameof(Error),
+                    new { message = "Possui uma solicitação vinculada, operação não é permitida." });
+            }
+            
         }
 
         public async Task<IActionResult> Details(int? id)
@@ -114,7 +124,9 @@ namespace ProjetoFinal.Controllers
 
             try
             {
-                await _leitoService.UpdateAsync(leito);
+                var obj = await _leitoService.FindByIdAsync(id);
+                _leitoService.UpdateData(obj, leito);
+                await _leitoService.UpdateAsync(obj);
                 return RedirectToAction(nameof(Index));
             }
             catch (ApplicationException e)

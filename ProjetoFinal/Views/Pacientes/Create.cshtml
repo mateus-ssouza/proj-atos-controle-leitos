@@ -82,6 +82,11 @@
             </div>
 
             <div class="form-group">
+                <label asp-for="Endereco.Complemento" class="form-label"></label>
+                <input id="complemento" asp-for="Endereco.Complemento" class="form-control" />
+            </div>
+
+            <div class="form-group">
                 <label asp-for="Endereco.Numero" class="form-label"></label>
                 <input asp-for="Endereco.Numero" class="form-control" />
                 <span asp-validation-for="Endereco.Numero" class="text-danger"></span>

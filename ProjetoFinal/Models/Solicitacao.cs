@@ -52,7 +52,9 @@ namespace ProjetoFinal.Models
         public int IdPaciente { get; set; }
         public Paciente Paciente { get; set; }
 
-        public Leito Leito { get; set; }
+        [Display(Name = "Leito")]
+        public int? IdLeito { get; set; }
+        public Leito? Leito { get; set; }
 
         public Solicitacao() {}
 

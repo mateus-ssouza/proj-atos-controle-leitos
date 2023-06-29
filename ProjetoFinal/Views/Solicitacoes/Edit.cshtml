@@ -42,18 +42,35 @@
                 </select>
                 <span asp-validation-for="Prioridade" class="text-danger"></span>
             </div>
-
-            <div class="form-group">
-                <label asp-for="TipoLeito" class="form-label"></label>
-                <select asp-for="TipoLeito" class="form-control">
-                    <option value="">Selecione tipo de leito</option>
-                    @foreach (var item in Enum.GetValues(typeof(TipoLeito)))
-                    {
-                        <option value="@item">@item</option>
-                    }
-                </select>
-                <span asp-validation-for="TipoLeito" class="text-danger"></span>
-            </div>
+            @if (Model.Status == SolicitacaoStatus.SOLICITADO)
+            {
+                <div class="form-group">
+                    <label asp-for="TipoLeito" class="form-label"></label>
+                    <select asp-for="TipoLeito" class="form-control">
+                        <option value="">Selecione tipo de leito</option>
+                        @foreach (var item in Enum.GetValues(typeof(TipoLeito)))
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    </select>
+                    <span asp-validation-for="TipoLeito" class="text-danger"></span>
+                </div>
+            } 
+            else
+            {
+                <div class="form-group">
+                    <label asp-for="TipoLeito" class="form-label"></label>
+                    <select asp-for="TipoLeito" class="form-control" disabled>
+                        <option value="">Selecione tipo de leito</option>
+                        @foreach (var item in Enum.GetValues(typeof(TipoLeito)))
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    </select>
+                    <span asp-validation-for="TipoLeito" class="text-danger"></span>
+                </div>
+            }
+            
 
             <div class="form-group">
                 <label asp-for="NomeMedico" class="form-label"></label>

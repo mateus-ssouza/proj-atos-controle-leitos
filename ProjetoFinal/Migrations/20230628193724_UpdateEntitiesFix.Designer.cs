@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ProjetoFinal.Data;
 
@@ -11,9 +12,11 @@ using ProjetoFinal.Data;
 namespace ProjetoFinal.Migrations
 {
     [DbContext(typeof(Contexto))]
-    partial class ContextoModelSnapshot : ModelSnapshot
+    [Migration("20230628193724_UpdateEntitiesFix")]
+    partial class UpdateEntitiesFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -153,6 +156,7 @@ namespace ProjetoFinal.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("IdLeito")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<int>("IdPaciente")
@@ -189,8 +193,7 @@ namespace ProjetoFinal.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("IdLeito")
-                        .IsUnique()
-                        .HasFilter("[IdLeito] IS NOT NULL");
+                        .IsUnique();
 
                     b.HasIndex("IdPaciente")
                         .IsUnique();
@@ -213,7 +216,9 @@ namespace ProjetoFinal.Migrations
                 {
                     b.HasOne("ProjetoFinal.Models.Leito", "Leito")
                         .WithOne("Solicitacao")
-                        .HasForeignKey("ProjetoFinal.Models.Solicitacao", "IdLeito");
+                        .HasForeignKey("ProjetoFinal.Models.Solicitacao", "IdLeito")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("ProjetoFinal.Models.Paciente", "Paciente")
                         .WithOne("Solicitacao")
