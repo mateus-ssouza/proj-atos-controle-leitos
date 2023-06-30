@@ -3,6 +3,7 @@ using ProjetoFinal.Data;
 using ProjetoFinal.Models;
 using ProjetoFinal.Models.ViewModels;
 using ProjetoFinal.Services.Exceptions;
+using ProjetoFinal.Models.Enums;
 
 namespace ProjetoFinal.Services
 {
@@ -37,7 +38,11 @@ namespace ProjetoFinal.Services
         {
             // Realiza a consulta para encontrar os pacientes sem solicitação
             var  list = await _contexto.Paciente
-                .Where(p => p.Solicitacao == null) // Verifica se o paciente não possui nenhuma solicitação
+                // Verifica se o paciente não possui nenhuma solicitação
+                .Where(p => p.Solicitacoes.Count == 0
+                // Verifica se o paciente possui alguma solicitação ATIVA
+                || !(p.Solicitacoes.Any(s => s.Status == SolicitacaoStatus.SOLICITADO 
+                || s.Status == SolicitacaoStatus.REGULADO))) 
                 .ToListAsync();
 
             return list;

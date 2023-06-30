@@ -23,9 +23,9 @@ namespace ProjetoFinal.Data
                 .HasForeignKey<Endereco>(e => e.IdPaciente);
 
             modelBuilder.Entity<Paciente>()
-                .HasOne(p => p.Solicitacao)
+                .HasMany(p => p.Solicitacoes)
                 .WithOne(s => s.Paciente)
-                .HasForeignKey<Solicitacao>(s => s.IdPaciente);
+                .HasForeignKey(s => s.IdPaciente);
 
             modelBuilder.Entity<Solicitacao>()
                 .HasOne(s => s.Leito)

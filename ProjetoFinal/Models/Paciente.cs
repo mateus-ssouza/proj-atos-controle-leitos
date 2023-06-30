@@ -41,11 +41,11 @@ namespace ProjetoFinal.Models
             ErrorMessage = "{0} insira os {1} caracteres.")]
         public string Telefone { get; set; }
         public Endereco Endereco { get; set; }
-        public Solicitacao Solicitacao { get; set; }
+        public ICollection<Solicitacao> Solicitacoes { get; set; } = new List<Solicitacao>();
 
         public Paciente() { }
 
-        public Paciente(int id, string nome, DateTime dataNascimento, string cpf, string rg, string email, string telefone, Endereco endereco, Solicitacao solicitacao)
+        public Paciente(int id, string nome, DateTime dataNascimento, string cpf, string rg, string email, string telefone, Endereco endereco)
         {
             Id = id;
             Nome = nome;
@@ -55,7 +55,16 @@ namespace ProjetoFinal.Models
             Email = email;
             Telefone = telefone;
             Endereco = endereco;
-            Solicitacao = solicitacao;
+        }
+
+        public void adicionarSolicitacao(Solicitacao obj)
+        {
+            Solicitacoes.Add(obj);
+        }
+
+        public void removerSolicitacao(Solicitacao obj)
+        {
+            Solicitacoes.Remove(obj);
         }
     }
 }

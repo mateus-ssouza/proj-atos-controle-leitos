@@ -52,12 +52,20 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.TipoLeito)
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Solicitacao.Paciente.Nome)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Solicitacao.NomeMedico)
-                </td>
+                @if (item.Status != StatusLeito.LIVRE)
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Solicitacao.Paciente.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Solicitacao.NomeMedico)
+                    </td>
+                }
+                else
+                {
+                    <td>---</td>
+                    <td>---</td>
+                }
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id" class="btn-acoes btn-acoes-ini">
                         <i class="fa-solid fa-pen"></i>
