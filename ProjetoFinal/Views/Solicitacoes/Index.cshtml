@@ -7,34 +7,42 @@
     ViewData["th_paciente"] = "Paciente";
 }
 
-<h2>@ViewData["Title"]</h2>
+<h4 class="text-uppercase text-primary">
+    <i class="fa-solid fa-file-medical"></i> @ViewData["Title"]
+</h4>
 
 <div class="d-flex justify-content-end mb-3">
-    <a asp-action="Create" class="btn btn-primary">Adicionar</a>
+    <a asp-action="Create"><i class="fa-solid fa-circle-plus fa-xl"></i></a>
 </div>
 
 <table class="table table-striped table-hover">
     <thead>
-        <tr class="table-success">
-            <th></th>
+        <tr class="table-primary">
+
             <th>
                 @ViewData["th_paciente"]
             </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.NomeMedico)
             </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.DataSolicitacao)
             </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.Prioridade)
             </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.Status)
             </th>
+
             <th>
                 @Html.DisplayNameFor(model => model.TipoLeito)
             </th>
+
             <th>
                 Ações
             </th>
@@ -44,25 +52,75 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td></td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Paciente.Nome)
+                    <span class="badge bg-light">@Html.DisplayFor(modelItem => item.Paciente.Nome)</span> 
                 </td>
+
                 <td>
-                    @Html.DisplayFor(modelItem => item.NomeMedico)
+                    <span class="badge bg-light">@Html.DisplayFor(modelItem => item.NomeMedico)</span>   
                 </td>
+
                 <td>
-                    @Html.DisplayFor(modelItem => item.DataSolicitacao)
+                    <span class="badge bg-light">@Html.DisplayFor(modelItem => item.DataSolicitacao)</span>  
                 </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Prioridade)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TipoLeito)
-                </td>
+
+                @if (item.Prioridade == SolicitacaoPrioridade.BAIXA)
+                {
+                    <td>
+                        <span class="badge rounded-pill bg-info">@Html.DisplayFor(modelItem => item.Prioridade)</span>
+                    </td>
+                }
+                else if (item.Prioridade == SolicitacaoPrioridade.MEDIA)
+                {
+                    <td>
+                        <span class="badge rounded-pill bg-warning">@Html.DisplayFor(modelItem => item.Prioridade)</span>
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <span class="badge rounded-pill bg-dark">@Html.DisplayFor(modelItem => item.Prioridade)</span>
+                    </td>
+                }
+
+                @if (item.Status == SolicitacaoStatus.SOLICITADO)
+                {
+                    <td>
+                        <span class="badge rounded-pill bg-info">@Html.DisplayFor(modelItem => item.Status)</span>  
+                    </td>
+                }
+                else if (item.Status == SolicitacaoStatus.REGULADO)
+                {
+                    <td>
+                        <span class="badge rounded-pill bg-warning">@Html.DisplayFor(modelItem => item.Status)</span> 
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        <span class="badge rounded-pill bg-success">@Html.DisplayFor(modelItem => item.Status)</span> 
+                    </td>
+                }
+
+                @if (item.TipoLeito == TipoLeito.CLINICO)
+                {
+                    <td>
+                        <span class="badge rounded-pill bg-info">
+                            @Html.DisplayFor(modelItem => item.TipoLeito)
+                             <i class="fa-solid fa-bed"></i>
+                        </span>
+                    </td>
+                }
+                else 
+                {
+                    <td>
+                        <span class="badge rounded-pill bg-success">
+                            @Html.DisplayFor(modelItem => item.TipoLeito)
+                             <i class="fa-solid fa-bed-pulse"></i>
+                        </span>
+                    </td>
+                }
+
                 <td>  
                     @if (item.Status != SolicitacaoStatus.FINALIZADA)
                     {

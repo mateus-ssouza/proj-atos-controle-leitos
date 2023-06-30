@@ -38,6 +38,7 @@ namespace ProjetoFinal.Models
         public string? Complemento { get; set; }
 
         [Required(ErrorMessage = "O campo {0} é requerido")]
+        [Display(Name = "Número")]
         [StringLength(8)]
         public string Numero { get; set; }
 
