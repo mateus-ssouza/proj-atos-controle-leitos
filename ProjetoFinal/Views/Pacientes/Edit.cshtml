@@ -1,106 +1,150 @@
 ﻿@model ProjetoFinal.Models.ViewModels.PacienteViewModel
 
 @{
-    ViewData["Title"] = "Edição";
+    ViewData["Title"] = "Informações do Paciente";
 }
 
-<h2>@ViewData["Title"]</h2>
+<div class="container">
+    <div class="text-center mt-5">
+        <h2 class="text-primary text-uppercase">
+            <i class="fa-solid fa-address-card"></i> @ViewData["Title"]
+        </h2>
+    </div>
 
-<div class="row form-control">
+    <div class="row mb-2">
+        <div class="col-lg-7 mx-auto">
+            <div class="card mt-2 mx-auto p-4 bg-light border-primary">
+                <div class="card-body bg-light">
 
-    <h4>Paciente</h4>
+                    <div class="container">
+                        <form asp-action="Edit" role="form">
 
-    <hr />
+                            <input type="hidden" asp-for="Paciente.Id" />
 
-    <div class="col-md-4">
-        <form asp-action="Edit">
+                            <div class="controls">
 
-            <input type="hidden" asp-for="Paciente.Id" />
-            
-            <div class="form-group">
-                <label asp-for="Paciente.Nome" class="form-label"></label>
-                <input asp-for="Paciente.Nome" class="form-control" />
-                <span asp-validation-for="Paciente.Nome" class="text-danger"></span>
+                                <div class="row mb-2">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Paciente.Nome" class="form-label text-uppercase fw-bold text-primary"></label>
+                                            <input asp-for="Paciente.Nome" class="form-control" />
+                                            <span asp-validation-for="Paciente.Nome" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Paciente.DataNascimento" class="form-label text-uppercase fw-bold text-primary"></label>
+                                            <input asp-for="Paciente.DataNascimento" class="form-control" />
+                                            <span asp-validation-for="Paciente.DataNascimento" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Paciente.Cpf" class="form-label text-uppercase fw-bold text-primary"></label>
+                                            <input asp-for="Paciente.Cpf" class="form-control" />
+                                            <span asp-validation-for="Paciente.Cpf" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Paciente.Rg" class="form-label text-uppercase fw-bold text-primary"></label>
+                                            <input asp-for="Paciente.Rg" class="form-control" />
+                                            <span asp-validation-for="Paciente.Rg" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Paciente.Email" class="form-label text-uppercase fw-bold text-primary"></label>
+                                            <input asp-for="Paciente.Email" class="form-control" />
+                                            <span asp-validation-for="Paciente.Email" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Paciente.Telefone" class="form-label text-uppercase fw-bold text-primary"></label>
+                                            <input asp-for="Paciente.Telefone" class="form-control" />
+                                            <span asp-validation-for="Paciente.Telefone" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Endereco.Cep" class="form-label text-uppercase fw-bold text-primary"></label>
+                                            <input id="cepInput" asp-for="Endereco.Cep" class="form-control" />
+                                            <span asp-validation-for="Endereco.Cep" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Endereco.Cidade" class="form-label text-uppercase fw-bold text-primary"></label>
+                                            <input id="cidade" asp-for="Endereco.Cidade" class="form-control" />
+                                            <span asp-validation-for="Endereco.Cidade" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Endereco.Estado" class="form-label text-uppercase fw-bold text-primary"></label>
+                                            <input id="estado" asp-for="Endereco.Estado" class="form-control" />
+                                            <span asp-validation-for="Endereco.Estado" class="text-danger"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Endereco.Bairro" class="form-label text-uppercase fw-bold text-primary"></label>
+                                            <input id="bairro" asp-for="Endereco.Bairro" class="form-control" />
+                                            <span asp-validation-for="Endereco.Bairro" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Endereco.Rua" class="form-label text-uppercase fw-bold text-primary"></label>
+                                            <input id="rua" asp-for="Endereco.Rua" class="form-control" />
+                                            <span asp-validation-for="Endereco.Rua" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Endereco.Numero" class="form-label text-uppercase fw-bold text-primary"></label>
+                                            <input asp-for="Endereco.Numero" class="form-control" />
+                                            <span asp-validation-for="Endereco.Numero" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-2">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Endereco.Complemento" class="form-label text-uppercase fw-bold text-primary"></label>
+                                            <input id="complemento" asp-for="Endereco.Complemento" class="form-control" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <input type="submit" value="Editar" class="btn btn-primary" />
+                                <a asp-action="Index" class="btn btn-info">Voltar</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
             </div>
-
-            <div class="form-group">
-                <label asp-for="Paciente.DataNascimento" class="form-label"></label>
-                <input asp-for="Paciente.DataNascimento" class="form-control" />
-                <span asp-validation-for="Paciente.DataNascimento" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Paciente.Cpf" class="form-label"></label>
-                <input asp-for="Paciente.Cpf" class="form-control" />
-                <span asp-validation-for="Paciente.Cpf" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Paciente.Rg" class="form-label"></label>
-                <input asp-for="Paciente.Rg" class="form-control" />
-                <span asp-validation-for="Paciente.Rg" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Paciente.Email" class="form-label"></label>
-                <input asp-for="Paciente.Email" class="form-control" />
-                <span asp-validation-for="Paciente.Email" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Paciente.Telefone" class="form-label"></label>
-                <input asp-for="Paciente.Telefone" class="form-control" />
-                <span asp-validation-for="Paciente.Telefone" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Endereco.Cep" class="form-label"></label>
-                <input id="cepInput" asp-for="Endereco.Cep" class="form-control" />
-                <span asp-validation-for="Endereco.Cep" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Endereco.Cidade" class="form-label"></label>
-                <input id="cidade" asp-for="Endereco.Cidade" class="form-control" />
-                <span asp-validation-for="Endereco.Cidade" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Endereco.Estado" class="form-label"></label>
-                <input id="estado" asp-for="Endereco.Estado" class="form-control" />
-                <span asp-validation-for="Endereco.Estado" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Endereco.Bairro" class="form-label"></label>
-                <input id="bairro" asp-for="Endereco.Bairro" class="form-control" />
-                <span asp-validation-for="Endereco.Bairro" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Endereco.Rua" class="form-label"></label>
-                <input id="rua" asp-for="Endereco.Rua" class="form-control" />
-                <span asp-validation-for="Endereco.Rua" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Endereco.Complemento" class="form-label"></label>
-                <input id="complemento" asp-for="Endereco.Complemento" class="form-control" />
-            </div>
-
-            <div class="form-group">
-                <label asp-for="Endereco.Numero" class="form-label"></label>
-                <input asp-for="Endereco.Numero" class="form-control" />
-                <span asp-validation-for="Endereco.Numero" class="text-danger"></span>
-            </div>
-
-            <br />
-
-            <div>
-                <input type="submit" value="Salvar" class="btn btn-primary" />
-                <a asp-action="Index" class="btn btn-secondary">Voltar</a>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 

@@ -1,13 +1,13 @@
 ﻿@model ProjetoFinal.Models.ViewModels.PacienteViewModel
 
 @{
-    ViewData["Title"] = "Cadastro";
+    ViewData["Title"] = "Cadastro do Paciente";
 }
 
 <div class="container">
     <div class="text-center mt-5">
-        <h2 class="text-primary">
-            <i class="fa-solid fa-address-card"></i> Cadastro do Paciente
+        <h2 class="text-primary text-uppercase">
+            <i class="fa-solid fa-address-card"></i> @ViewData["Title"]
        </h2>
     </div>
 
@@ -136,7 +136,7 @@
                             
                             <div>
                                 <input type="submit" value="Salvar" class="btn btn-primary" />
-                                <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+                                <a asp-action="Index" class="btn btn-info">Voltar</a>
                             </div>
                         </form>
                     </div>

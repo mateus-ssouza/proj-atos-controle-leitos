@@ -1,97 +1,184 @@
 ﻿@model ProjetoFinal.Models.Paciente
 
 @{
-    ViewData["Title"] = "Detalhes";
+    ViewData["Title"] = "Detalhes do paciente";
 }
 
-<h2>@ViewData["Title"]</h2>
-
-<div class="form-control">
-    <h4>Paciente</h4>
-    <hr />
-    <div class="form-control">
-        <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Nome)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Nome)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.DataNascimento)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.DataNascimento)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Cpf)
-            </dt>
-            <dd class="cpf">
-                @Html.DisplayFor(model => model.Cpf)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Rg)
-            </dt>
-            <dd class="rg">
-                @Html.DisplayFor(model => model.Rg)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Email)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Email)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Telefone)
-            </dt>
-            <dd class="telefone">
-                @Html.DisplayFor(model => model.Telefone)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Endereco.Cidade)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Endereco.Cidade)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Endereco.Estado)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Endereco.Estado)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Endereco.Cep)
-            </dt>
-            <dd class="cep">
-                @Html.DisplayFor(model => model.Endereco.Cep)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Endereco.Bairro)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Endereco.Bairro)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Endereco.Rua)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Endereco.Rua)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Endereco.Complemento)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Endereco.Complemento)
-            </dd>
-            <dt>
-                @Html.DisplayNameFor(model => model.Endereco.Numero)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Endereco.Numero)
-            </dd>
-        </dl>
+<div class="container">
+    <div class="text-center mt-5">
+        <h2 class="text-primary text-uppercase">
+            <i class="fa-solid fa-address-card"></i> @ViewData["Title"]
+        </h2>
     </div>
-    <br />
-    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a>
-    <a asp-action="Index" class="btn btn-secondary">Voltar</a>
+
+    <div class="row mb-1">
+        <div class="col-lg-7 mx-auto">
+            <div class="card mt-2 mx-auto p-4 bg-light border-primary">
+                <div class="card-body bg-light">
+
+                    <div class="container bg-white mb-3" style="border: 1px solid #78c2ad; border-radius: 5px;">
+
+                        <div class="controls" >
+
+                            <div class="row mb-2 mt-3">
+                                <div class="col-md-6">
+                                    <dl class="dl-horizontal">
+                                        <dt class="text-uppercase fw-bold text-primary">
+                                            @Html.DisplayNameFor(model => model.Nome)
+                                        </dt>
+                                        <dd class="fw-bold">
+                                            @Html.DisplayFor(model => model.Nome)
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="col-md-6">
+                                    <dl class="dl-horizontal">
+                                        <dt class="text-uppercase fw-bold text-primary">
+                                            @Html.DisplayNameFor(model => model.DataNascimento)
+                                        </dt>
+                                        <dd class="fw-bold">
+                                            @Html.DisplayFor(model => model.DataNascimento)
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <dl class="dl-horizontal">
+                                        <dt class="text-uppercase fw-bold text-primary">
+                                            @Html.DisplayNameFor(model => model.Cpf)
+                                        </dt>
+                                        <dd class="cpf fw-bold">
+                                            @Html.DisplayFor(model => model.Cpf)
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="col-md-6">
+                                    <dl class="dl-horizontal">
+                                        <dt class="text-uppercase fw-bold text-primary">
+                                            @Html.DisplayNameFor(model => model.Rg)
+                                        </dt>
+                                        <dd class="rg fw-bold">
+                                            @Html.DisplayFor(model => model.Rg)
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <dl class="dl-horizontal">
+                                        <dt class="text-uppercase fw-bold text-primary">
+                                            @Html.DisplayNameFor(model => model.Email)
+                                        </dt>
+                                        <dd class="fw-bold">
+                                            @Html.DisplayFor(model => model.Email)
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="col-md-6">
+                                    <dl class="dl-horizontal">
+                                        <dt class="text-uppercase fw-bold text-primary">
+                                            @Html.DisplayNameFor(model => model.Telefone)
+                                        </dt>
+                                        <dd class="telefone fw-bold">
+                                            @Html.DisplayFor(model => model.Telefone)
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <dl class="dl-horizontal">
+                                        <dt class="text-uppercase fw-bold text-primary">
+                                            @Html.DisplayNameFor(model => model.Endereco.Cidade)
+                                        </dt>
+                                        <dd class="fw-bold">
+                                            @Html.DisplayFor(model => model.Endereco.Cidade)
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="col-md-6">
+                                    <dl class="dl-horizontal">
+                                        <dt class="text-uppercase fw-bold text-primary">
+                                            @Html.DisplayNameFor(model => model.Endereco.Estado)
+                                        </dt>
+                                        <dd class="fw-bold">
+                                            @Html.DisplayFor(model => model.Endereco.Estado)
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <dl class="dl-horizontal">
+                                        <dt class="text-uppercase fw-bold text-primary">
+                                            @Html.DisplayNameFor(model => model.Endereco.Cep)
+                                        </dt>
+                                        <dd class="cep fw-bold">
+                                            @Html.DisplayFor(model => model.Endereco.Cep)
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="col-md-6">
+                                    <dl class="dl-horizontal">
+                                        <dt class="text-uppercase fw-bold text-primary">
+                                            @Html.DisplayNameFor(model => model.Endereco.Bairro)
+                                        </dt>
+                                        <dd class="fw-bold">
+                                            @Html.DisplayFor(model => model.Endereco.Bairro)
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col-md-6">
+                                    <dl class="dl-horizontal">
+                                        <dt class="text-uppercase fw-bold text-primary">
+                                            @Html.DisplayNameFor(model => model.Endereco.Rua)
+                                        </dt>
+                                        <dd class="fw-bold">
+                                            @Html.DisplayFor(model => model.Endereco.Rua)
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="col-md-6">
+                                    <dl class="dl-horizontal">
+                                        <dt class="text-uppercase fw-bold text-primary">
+                                            @Html.DisplayNameFor(model => model.Endereco.Complemento)
+                                        </dt>
+                                        <dd class="fw-bold">
+                                            @Html.DisplayFor(model => model.Endereco.Complemento)
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+
+                            <div class="row mb-1">
+                                <div class="col-md-6">
+                                    <dl class="dl-horizontal">
+                                        <dt class="text-uppercase fw-bold text-primary">
+                                            @Html.DisplayNameFor(model => model.Endereco.Numero)
+                                        </dt>
+                                        <dd class="fw-bold">
+                                            @Html.DisplayFor(model => model.Endereco.Numero)
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Editar</a>
+                        <a asp-action="Index" class="btn btn-info">Voltar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
