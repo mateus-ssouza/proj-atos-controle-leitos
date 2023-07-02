@@ -3,105 +3,132 @@
 @model ProjetoFinal.Models.Solicitacao
 
 @{
-    ViewData["Title"] = "Edição";
+    ViewData["Title"] = "Informações da Solicitação";
     ViewData["label_paciente"] = "Paciente";
 }
 
-<h2>@ViewData["Title"]</h2>
+<div class="container">
+    <div class="text-center mt-5">
+        <h2 class="text-primary text-uppercase">
+            <i class="fa-solid fa-file-medical"></i> @ViewData["Title"]
+        </h2>
+    </div>
 
-<div class="row form-control border-primary mb-3">
+    <div class="row mb-2">
+        <div class="col-lg-7 mx-auto">
+            <div class="card mt-2 mx-auto p-4 bg-light border-primary">
+                <div class="card-body bg-light">
+                    <form asp-action="Edit" role="form">
 
-    <h4>Solicitação</h4>
+                        <input type="hidden" asp-for="Id" />
 
-    <hr />
+                        <div class="container bg-white mb-3" style="border: 1px solid #78c2ad; border-radius: 5px;">
 
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            
-            <input type="hidden" asp-for="Id" />
+                            <div class="controls">
 
-            <div class="form-group">
-                <label class="form-label">@ViewData["label_paciente"]</label>
-                <input asp-for="Paciente.Nome" class="form-control" disabled/>
-            </div>
+                                <div class="row mb-2 mt-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class="form-label text-uppercase fw-bold text-primary">@ViewData["label_paciente"]</label>
+                                            <input asp-for="Paciente.Nome" class="form-control" disabled />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Motivo" class="form-label text-uppercase fw-bold text-primary"></label>
+                                            <input asp-for="Motivo" class="form-control" />
+                                            <span asp-validation-for="Motivo" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
 
-            <div class="form-group">
-                <label asp-for="Motivo" class="form-label"></label>
-                <input asp-for="Motivo" class="form-control" />
-                <span asp-validation-for="Motivo" class="text-danger"></span>
-            </div>
+                                <div class="row mb-2">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Prioridade" class="form-label text-uppercase fw-bold text-primary"></label>
+                                            <select asp-for="Prioridade" class="form-control">
+                                                <option value="">Selecione a prioridade</option>
+                                                @foreach (var item in Enum.GetValues(typeof(SolicitacaoPrioridade)))
+                                                {
+                                                    <option value="@item">@item</option>
+                                                }
+                                            </select>
+                                            <span asp-validation-for="Prioridade" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        @if (Model.Status == SolicitacaoStatus.SOLICITADO)
+                                        {
+                                            <div class="form-group">
+                                                <label asp-for="TipoLeito" class="form-label text-uppercase fw-bold text-primary"></label>
+                                                <select asp-for="TipoLeito" class="form-control">
+                                                    <option value="">Selecione tipo de leito</option>
+                                                    @foreach (var item in Enum.GetValues(typeof(TipoLeito)))
+                                                    {
+                                                        <option value="@item">@item</option>
+                                                    }
+                                                </select>
+                                                <span asp-validation-for="TipoLeito" class="text-danger"></span>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="form-group">
+                                                <label asp-for="TipoLeito" class="form-label text-uppercase fw-bold text-primary"></label>
+                                                <select asp-for="TipoLeito" class="form-control" disabled>
+                                                    <option value="">Selecione tipo de leito</option>
+                                                    @foreach (var item in Enum.GetValues(typeof(TipoLeito)))
+                                                    {
+                                                        <option value="@item">@item</option>
+                                                    }
+                                                </select>
+                                                <span asp-validation-for="TipoLeito" class="text-danger"></span>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
 
-            <div class="form-group">
-                <label asp-for="Prioridade" class="form-label"></label>
-                <select asp-for="Prioridade" class="form-control">
-                    <option value="">Selecione a prioridade</option>
-                    @foreach (var item in Enum.GetValues(typeof(SolicitacaoPrioridade)))
-                    {
-                        <option value="@item">@item</option>
-                    }
-                </select>
-                <span asp-validation-for="Prioridade" class="text-danger"></span>
-            </div>
-            @if (Model.Status == SolicitacaoStatus.SOLICITADO)
-            {
-                <div class="form-group">
-                    <label asp-for="TipoLeito" class="form-label"></label>
-                    <select asp-for="TipoLeito" class="form-control">
-                        <option value="">Selecione tipo de leito</option>
-                        @foreach (var item in Enum.GetValues(typeof(TipoLeito)))
-                        {
-                            <option value="@item">@item</option>
-                        }
-                    </select>
-                    <span asp-validation-for="TipoLeito" class="text-danger"></span>
+                                <div class="row mb-2">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="NomeMedico" class="form-label text-uppercase fw-bold text-primary"></label>
+                                            <input asp-for="NomeMedico" class="form-control" />
+                                            <span asp-validation-for="NomeMedico" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="NomeEnfermeiro" class="form-label text-uppercase fw-bold text-primary"></label>
+                                            <input asp-for="NomeEnfermeiro" class="form-control" />
+                                            <span asp-validation-for="NomeEnfermeiro" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row mb-4">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Observacoes" class="form-label text-uppercase fw-bold text-primary"></label>
+                                            <textarea asp-for="Observacoes" class="form-control" rows="4"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <input type="submit" value="Editar" class="btn btn-primary" />
+                            <a asp-action="Index" class="btn btn-info">Voltar</a>
+                        </div>
+                    </form>
                 </div>
-            } 
-            else
-            {
-                <div class="form-group">
-                    <label asp-for="TipoLeito" class="form-label"></label>
-                    <select asp-for="TipoLeito" class="form-control" disabled>
-                        <option value="">Selecione tipo de leito</option>
-                        @foreach (var item in Enum.GetValues(typeof(TipoLeito)))
-                        {
-                            <option value="@item">@item</option>
-                        }
-                    </select>
-                    <span asp-validation-for="TipoLeito" class="text-danger"></span>
-                </div>
-            }
-            
-
-            <div class="form-group">
-                <label asp-for="NomeMedico" class="form-label"></label>
-                <input asp-for="NomeMedico" class="form-control" />
-                <span asp-validation-for="NomeMedico" class="text-danger"></span>
             </div>
-
-            <div class="form-group">
-                <label asp-for="NomeEnfermeiro" class="form-label"></label>
-                <input asp-for="NomeEnfermeiro" class="form-control" />
-                <span asp-validation-for="NomeEnfermeiro" class="text-danger"></span>
-            </div>
-
-            <div class="form-group">
-
-                <label asp-for="Observacoes" class="form-label"></label>
-                <textarea asp-for="Observacoes" class="form-control" rows="4"></textarea>
-
-            </div>
-
-            <br />
-            <div>
-                <input type="submit" value="Salvar" class="btn btn-primary" />
-                <a asp-action="Index" class="btn btn-secondary">Voltar</a>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
 @section Scripts
-{
+    {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }

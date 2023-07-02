@@ -15,15 +15,15 @@
         <div class="col-lg-7 mx-auto">
             <div class="card mt-2 mx-auto p-4 bg-light border-primary">
                 <div class="card-body bg-light">
+                    <form asp-action="Edit" role="form">
 
-                    <div class="container">
-                        <form asp-action="Edit" role="form">
+                        <input type="hidden" asp-for="Paciente.Id" />
 
-                            <input type="hidden" asp-for="Paciente.Id" />
+                        <div class="container bg-white mb-3" style="border: 1px solid #78c2ad; border-radius: 5px;">
 
                             <div class="controls">
 
-                                <div class="row mb-2">
+                                <div class="row mb-2 mt-3">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label asp-for="Paciente.Nome" class="form-label text-uppercase fw-bold text-primary"></label>
@@ -126,7 +126,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row mb-2">
+                                <div class="row mb-4">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label asp-for="Endereco.Complemento" class="form-label text-uppercase fw-bold text-primary"></label>
@@ -135,13 +135,13 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <div>
-                                <input type="submit" value="Editar" class="btn btn-primary" />
-                                <a asp-action="Index" class="btn btn-info">Voltar</a>
-                            </div>
-                        </form>
-                    </div>
+                        <div>
+                            <input type="submit" value="Editar" class="btn btn-primary" />
+                            <a asp-action="Index" class="btn btn-info">Voltar</a>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
