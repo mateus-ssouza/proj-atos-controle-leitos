@@ -41,6 +41,10 @@ namespace ProjetoFinal.Controllers
         public async Task<IActionResult> Create(Solicitacao solicitacao)
         {
             await _solicitacaoService.InsertAsync(solicitacao);
+
+            TempData["AlertMessage"] = "Solicitação criada com sucesso!";
+            TempData["AlertType"] = "success";
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -77,6 +81,10 @@ namespace ProjetoFinal.Controllers
             }
 
             await _solicitacaoService.RemoveAsync(id);
+
+            TempData["AlertMessage"] = "Solicitação removida com sucesso!";
+            TempData["AlertType"] = "success";
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -134,6 +142,10 @@ namespace ProjetoFinal.Controllers
                 var obj = await _solicitacaoService.FindByIdAsync(id);
                 _solicitacaoService.UpdateData(obj, solicitacao);
                 await _solicitacaoService.UpdateAsync(obj);
+
+                TempData["AlertMessage"] = "Dados da solicitação atulizado com sucesso!";
+                TempData["AlertType"] = "success";
+
                 return RedirectToAction(nameof(Index));
             }
             catch (ApplicationException e)
@@ -201,6 +213,10 @@ namespace ProjetoFinal.Controllers
 
                 await _solicitacaoService.UpdateAsync(obj);
                 await _leitoService.UpdateAsync(leito);
+
+                TempData["AlertMessage"] = "Reserva no leito efetuada com sucesso!";
+                TempData["AlertType"] = "success";
+
                 return RedirectToAction(nameof(Index));
             }
             catch (ApplicationException e)

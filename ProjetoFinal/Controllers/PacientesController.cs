@@ -43,6 +43,9 @@ namespace ProjetoFinal.Controllers
             await _pacienteService.InsertAsync(paciente);
             await _enderecoService.InsertAsync(endereco);
 
+            TempData["AlertMessage"] = "Paciente criado com sucesso!";
+            TempData["AlertType"] = "success";
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -70,6 +73,10 @@ namespace ProjetoFinal.Controllers
         public async Task<IActionResult> Delete(int id)
         {
             await _pacienteService.RemoveAsync(id);
+
+            TempData["AlertMessage"] = "Paciente removido com sucesso!";
+            TempData["AlertType"] = "success";
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -133,6 +140,10 @@ namespace ProjetoFinal.Controllers
                 var obj = await _pacienteService.FindByIdAsync(id);
                 _pacienteService.UpdateData(obj, viewModel);
                 await _pacienteService.UpdateAsync(obj);
+
+                TempData["AlertMessage"] = "Dados do paciente atualizado com sucesso!";
+                TempData["AlertType"] = "success";
+
                 return RedirectToAction(nameof(Index));
             }
             catch (ApplicationException e)

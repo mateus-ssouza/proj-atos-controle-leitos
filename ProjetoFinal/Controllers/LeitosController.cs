@@ -35,6 +35,10 @@ namespace ProjetoFinal.Controllers
         public async Task<IActionResult> Create(Leito leito)
         {
             await _leitoService.InsertAsync(leito);
+
+            TempData["AlertMessage"] = "Leito criado com sucesso!";
+            TempData["AlertType"] = "success";
+
             return RedirectToAction(nameof(Index));
         }
 
@@ -64,6 +68,10 @@ namespace ProjetoFinal.Controllers
             try
             {
                 await _leitoService.RemoveAsync(id);
+
+                TempData["AlertMessage"] = "Leito removido com sucesso!";
+                TempData["AlertType"] = "success";
+
                 return RedirectToAction(nameof(Index));
             }
             catch (IntegrityException)
@@ -128,13 +136,17 @@ namespace ProjetoFinal.Controllers
                 var obj = await _leitoService.FindByIdAsync(id);
                 _leitoService.UpdateData(obj, leito);
                 await _leitoService.UpdateAsync(obj);
+                
+                TempData["AlertMessage"] = "Dados do leito atualizado com sucesso!";
+                TempData["AlertType"] = "success";
+
                 return RedirectToAction(nameof(Index));
             }
             catch (ApplicationException e)
             {
                 return RedirectToAction(nameof(Error),
                     new { message = e.Message });
-            }
+            }          
         }
 
         public async Task<IActionResult> Relocate(int? id)
@@ -201,6 +213,9 @@ namespace ProjetoFinal.Controllers
                 await _leitoService.UpdateAsync(novoLeitoDaSolicitacao);
                 await _leitoService.UpdateAsync(antigoLeitoDaSolicitacao);
 
+                TempData["AlertMessage"] = "Paciente transferido com sucesso!";
+                TempData["AlertType"] = "success";
+
                 return RedirectToAction(nameof(Index));
             }
             catch (ApplicationException e)
@@ -264,7 +279,10 @@ namespace ProjetoFinal.Controllers
 
                 await _solicitacaoService.UpdateAsync(solicitacao);
                 await _leitoService.UpdateAsync(leito);
-     
+
+                TempData["AlertMessage"] = "Alocação finalizada com sucesso!";
+                TempData["AlertType"] = "success";
+
                 return RedirectToAction(nameof(Index));
             }
             catch (ApplicationException e)

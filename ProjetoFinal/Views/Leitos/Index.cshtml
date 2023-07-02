@@ -8,15 +8,17 @@
     ViewData["th_paciente"] = "Paciente";
 }
 
-<h4 class="text-uppercase text-primary fw-bold">
+<h4 class="text-uppercase text-primary fw-bold mt-5">
     <i class="fa-solid fa-bed"></i> @ViewData["Title"]
 </h4>
 
 <div class="d-flex justify-content-end mb-3">
-    <a asp-action="Create"><i class="fa-solid fa-circle-plus fa-xl"></i></a>
+    <a asp-action="Create" class="btn btn-primary btn-sm text-uppercase">
+        Adicionar <i class="fa-solid fa-plus"></i>
+    </a>
 </div>
 
-<table class="table table-striped table-hover">
+<table id="table-design" class="table table-striped table-hover">
     <thead>
         <tr class="table-primary">
 

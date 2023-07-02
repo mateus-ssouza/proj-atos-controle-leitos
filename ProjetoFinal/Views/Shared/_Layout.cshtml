@@ -7,10 +7,17 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-minty.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ProjetoFinal.styles.css" asp-append-version="true" />
-
+   
+    <!-- biblioteca para ícones -->
     <link href="~/lib/fontawesome/css/fontawesome.css" rel="stylesheet">
     <link href="~/lib/fontawesome/css/solid.css" rel="stylesheet">
     <link href="~/lib/fontawesome/css/brands.css" rel="stylesheet">
+
+    <!-- css das tabelas -->
+    <link href="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.css" rel="stylesheet" />
+    
+    <!-- css das notificações -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
 
     <style>
         a {
@@ -30,7 +37,7 @@
         }
     </style>
 </head>
-<body>
+<body class="bg-primary bg-opacity-10">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -73,7 +80,14 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+
+    <!-- scripts prontos utilizados -->
+    <!-- script para criar máscaras-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js" asp-append-version="true"></script>
+    <!-- script para criar as tabelas -->
+    <script src="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.js"></script>
+    <!-- script para criar notificações -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
     <script>
         // Função para a máscara do CPF
@@ -104,6 +118,27 @@
 
         $('#cepInput').on('blur', consultarCEP);
     </script>
+
+    <script>
+        $(document).ready(function () {
+            // Verificar se há uma mensagem de alerta no TempData
+            var alertMessage = '@TempData["AlertMessage"]';
+            var alertType = '@TempData["AlertType"]';
+
+            if (alertMessage && alertType) {
+                // Exibir o alerta usando o Toastr
+                toastr.options = {
+                    closeButton: true,
+                    progressBar: true,
+                    positionClass: "toast-top-center",
+                    timeOut: 5000
+                };
+
+                toastr[alertType](alertMessage);
+            }
+        });
+    </script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
