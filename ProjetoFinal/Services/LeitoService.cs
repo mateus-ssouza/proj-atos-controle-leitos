@@ -33,6 +33,7 @@ namespace ProjetoFinal.Services
         {
             return await _contexto.Leito
                 .Include(obj => obj.Solicitacao)
+                .Include(obj => obj.Solicitacao.Paciente)
                 .FirstOrDefaultAsync(obj => obj.Id == id);
         }
 

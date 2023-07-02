@@ -3,78 +3,103 @@
 @model ProjetoFinal.Models.Leito
 
 @{
-    ViewData["Title"] = "Edição";
+    ViewData["Title"] = "Informações do Leito";
 }
 
-<h2>@ViewData["Title"]</h2>
+<div class="container">
+    <div class="text-center mt-5">
+        <h2 class="text-primary text-uppercase">
+            <i class="fa-solid fa-bed"></i> @ViewData["Title"]
+        </h2>
+    </div>
 
-<div class="row form-control">
+    <div class="row mb-2">
+        <div class="col-lg-7 mx-auto">
+            <div class="card mt-2 mx-auto p-4 bg-primary bg-opacity-25 border-primary">
 
-    <h4>Leito</h4>
+                <div class="card-body">
 
-    <hr />
+                    <form asp-action="Edit" role="form">
 
-    <div class="col-md-4">
-        <form asp-action="Edit">
+                        <input type="hidden" asp-for="Id" />
 
-            <input type="hidden" asp-for="Id" />
+                        <div class="container bg-white mb-3 borda-container">
 
-            <div class="form-group">
-                <label asp-for="Codigo" class="form-label"></label>
-                <input asp-for="Codigo" class="form-control" />
-                <span asp-validation-for="Codigo" class="text-danger"></span>
-            </div>
+                            <div class="controls">
 
-            <div class="form-group">
-                <label asp-for="Status" class="form-label"></label>
-                <select asp-for="Status" class="form-control" disabled>
-                    <option value="">Selecione o status do leito</option>
-                    @foreach (var item in Enum.GetValues(typeof(StatusLeito)))
-                    {
-                        <option value="@item">@item</option>
-                    }
-                </select>
-                <span asp-validation-for="Status" class="text-danger"></span>
-            </div>
+                                <div class="row mb-2 mt-3">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Codigo" class="form-label text-uppercase fw-bold text-primary"></label>
+                                            <input asp-for="Codigo" class="form-control" />
+                                            <span asp-validation-for="Codigo" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label asp-for="Status" class="form-label"></label>
+                                            <select asp-for="Status" class="form-control" disabled>
+                                                <option value="">Selecione o status do leito</option>
+                                                @foreach (var item in Enum.GetValues(typeof(StatusLeito)))
+                                                {
+                                                    <option value="@item">@item</option>
+                                                }
+                                            </select>
+                                            <span asp-validation-for="Status" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
 
-            @if (Model.Status == StatusLeito.LIVRE)
-            {
-                <div class="form-group">
-                    <label asp-for="TipoLeito" class="form-label"></label>
-                    <select asp-for="TipoLeito" class="form-control">
-                        <option value="">Selecione o tipo do leito</option>
-                        @foreach (var item in Enum.GetValues(typeof(TipoLeito)))
-                        {
-                            <option value="@item">@item</option>
-                        }
-                    </select>
-                    <span asp-validation-for="TipoLeito" class="text-danger"></span>
+                                @if (Model.Status == StatusLeito.LIVRE)
+                                {
+                                    <div class="row mb-4">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="TipoLeito" class="form-label"></label>
+                                                <select asp-for="TipoLeito" class="form-control">
+                                                    <option value="">Selecione o tipo do leito</option>
+                                                    @foreach (var item in Enum.GetValues(typeof(TipoLeito)))
+                                                    {
+                                                        <option value="@item">@item</option>
+                                                    }
+                                                </select>
+                                                <span asp-validation-for="TipoLeito" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="row mb-4">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label asp-for="TipoLeito" class="form-label"></label>
+                                                <select asp-for="TipoLeito" class="form-control" disabled>
+                                                    <option value="">Selecione o tipo do leito</option>
+                                                    @foreach (var item in Enum.GetValues(typeof(TipoLeito)))
+                                                    {
+                                                        <option value="@item">@item</option>
+                                                    }
+                                                </select>
+                                                <span asp-validation-for="TipoLeito" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                        <div>
+                            <input type="submit" value="Salvar" class="btn btn-primary" />
+                            <a asp-action="Index" class="btn btn-info">Voltar</a>
+                        </div>
+                    </form>
                 </div>
-            }
-            else
-            {
-                <div class="form-group">
-                    <label asp-for="TipoLeito" class="form-label"></label>
-                    <select asp-for="TipoLeito" class="form-control" disabled>
-                        <option value="">Selecione o tipo do leito</option>
-                        @foreach (var item in Enum.GetValues(typeof(TipoLeito)))
-                        {
-                            <option value="@item">@item</option>
-                        }
-                    </select>
-                    <span asp-validation-for="TipoLeito" class="text-danger"></span>
-                </div>
-            }
-
-
-            <br />
-            <div>
-                <input type="submit" value="Salvar" class="btn btn-primary" />
-                <a asp-action="Index" class="btn btn-secondary">Voltar</a>
             </div>
-        </form>
+        </div>
     </div>
 </div>
+
 @section Scripts
     {
     @{
