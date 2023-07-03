@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ProjetoFinal</title>
+    <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-minty.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ProjetoFinal.styles.css" asp-append-version="true" />
-   
+
     <!-- biblioteca para ícones -->
     <link href="~/lib/fontawesome/css/fontawesome.css" rel="stylesheet">
     <link href="~/lib/fontawesome/css/solid.css" rel="stylesheet">
@@ -15,7 +15,7 @@
 
     <!-- css das tabelas -->
     <link href="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.css" rel="stylesheet" />
-    
+
     <!-- css das notificações -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
 
@@ -23,10 +23,12 @@
         a {
             text-decoration: none;
         }
+
         .btn-acoes {
             text-decoration: none;
             display: inline-block;
         }
+
         .btn-acoes-ini {
             padding-right: 5px;
         }
@@ -37,6 +39,7 @@
         }
     </style>
 </head>
+
 <body class="bg-primary bg-opacity-10">
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary border-bottom box-shadow mb-3">
@@ -88,6 +91,41 @@
     <script src="https://cdn.datatables.net/v/bs5/dt-1.13.4/datatables.min.js"></script>
     <!-- script para criar notificações -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <!-- script para criar o canvas do gráfico -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        // Dados para o gráfico
+        var dadosLeitos = {
+            labels: ['Leitos Ocupados', 'Leitos Livres'],
+            datasets: [{
+                data: [@ViewBag.LeitosOcupados, @ViewBag.TotalLeitos - @ViewBag.LeitosOcupados],
+                backgroundColor: [
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(96, 155, 138, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(96, 155, 138, 1)'
+                ],
+                borderWidth: 1
+            }]
+        };
+
+        // Configurações do gráfico
+        var optionsLeitos = {
+            responsive: true,
+            maintainAspectRatio: false
+        };
+
+        // Criação do gráfico
+        var ctxLeitos = document.getElementById('leitosChart').getContext('2d');
+        var leitosChart = new Chart(ctxLeitos, {
+            type: 'pie',
+            data: dadosLeitos,
+            options: optionsLeitos
+        });
+    </script>
 
     <script>
         // Função para a máscara do CPF
@@ -112,7 +150,7 @@
                     $('#cidade').val(data.localidade);
                     $('#estado').val(data.uf);
                     $('#complemento').val(data.complemento);
-                } 
+                }
             });
         }
 

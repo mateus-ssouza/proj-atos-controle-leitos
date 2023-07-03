@@ -16,17 +16,21 @@ namespace ProjetoFinal.Services
             _contexto = contexto;
         }
 
+        // Listar todos os pacientes
         public async Task<List<Paciente>> FindAllAsync()
         {
             return await _contexto.Paciente.ToListAsync();
         }
 
+        // Inserir um paciente
         public async Task InsertAsync(Paciente obj)
         {
             _contexto.Add(obj);
             await _contexto.SaveChangesAsync();
         }
 
+        // Buscar por ID um paciente
+        // (junto do paciente vem os dados do endereço)
         public async Task<Paciente> FindByIdAsync(int id)
         {
             return await _contexto.Paciente
@@ -34,9 +38,9 @@ namespace ProjetoFinal.Services
                 .FirstOrDefaultAsync(obj => obj.Id == id);
         }
 
-        public async Task<List<Paciente>> FindPacientesSemSolicitacao()
+        // Listar todos os pacientes que não possuem solicitações ativa
+        public async Task<List<Paciente>> FindPacientesSemSolicitacaoAtiva()
         {
-            // Realiza a consulta para encontrar os pacientes sem solicitação
             var  list = await _contexto.Paciente
                 // Verifica se o paciente não possui nenhuma solicitação
                 .Where(p => p.Solicitacoes.Count == 0
@@ -48,7 +52,7 @@ namespace ProjetoFinal.Services
             return list;
         }
 
-
+        // Remover um paciente
         public async Task RemoveAsync(int id)
         {
             var obj =  await _contexto.Paciente.FindAsync(id);
@@ -56,6 +60,7 @@ namespace ProjetoFinal.Services
             await _contexto.SaveChangesAsync();
         }
 
+        // Editar informações de um paciente
         public async Task UpdateAsync(Paciente obj)
         {
             bool existeAlgum = await _contexto.Paciente.AnyAsync(x => x.Id == obj.Id);
@@ -77,6 +82,7 @@ namespace ProjetoFinal.Services
             } 
         }
 
+        // Atualizar dados de um paciente (função auxiliar)
         public void UpdateData(Paciente _old, PacienteViewModel _new)
         {
             _old.Nome = _new.Paciente.Nome;

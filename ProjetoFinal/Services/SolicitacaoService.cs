@@ -16,6 +16,8 @@ namespace ProjetoFinal.Services
             _contexto = contexto;
         }
 
+        // Listar todos as solicitações
+        // (junto da solicitação vem os dados do paciente)
         public async Task<List<Solicitacao>> FindAllAsync()
         {
             return await _contexto.Solicitacao
@@ -23,6 +25,7 @@ namespace ProjetoFinal.Services
                 .ToListAsync();
         }
 
+        // Inserir solicitação
         public async Task InsertAsync(Solicitacao obj)
         {
             obj.DataSolicitacao = DateTime.Now;
@@ -30,6 +33,8 @@ namespace ProjetoFinal.Services
             await _contexto.SaveChangesAsync();
         }
 
+        // Buscar solicitação por ID
+        // (junto da solicitação vem os dados do paciente e do leito)
         public async Task<Solicitacao> FindByIdAsync(int id)
         {
             return await _contexto.Solicitacao
@@ -38,6 +43,7 @@ namespace ProjetoFinal.Services
                 .FirstOrDefaultAsync(obj => obj.Id == id);
         }
 
+        // Buscar leito da solicitação por ID
         public async Task<Solicitacao> FindByIdLeitoAsync(int id)
         {
             return await _contexto.Solicitacao
@@ -46,6 +52,7 @@ namespace ProjetoFinal.Services
                 .FirstOrDefaultAsync(obj => obj.IdLeito == id);
         }
 
+        // Remover uma solicitação
         public async Task RemoveAsync(int id)
         {
             var obj = await _contexto.Solicitacao.FindAsync(id);
@@ -53,6 +60,7 @@ namespace ProjetoFinal.Services
             await _contexto.SaveChangesAsync();
         }
 
+        // Editar informações de uma solicitação
         public async Task UpdateAsync(Solicitacao obj)
         {
             bool existeAlgum = await _contexto.Solicitacao.AnyAsync(x => x.Id == obj.Id);
@@ -74,6 +82,7 @@ namespace ProjetoFinal.Services
             }
         }
 
+        // Atualizar dados de uma solicitação (função auxiliar)
         public void UpdateData(Solicitacao _old, Solicitacao _new)
         {
             _old.Motivo = _new.Motivo;
@@ -84,6 +93,7 @@ namespace ProjetoFinal.Services
             _old.Observacoes = _new.Observacoes;
         }
 
+        // Regular uma solicitação (função auxiliar)
         public void RegularSolicitacao(Solicitacao _old, SolicitacaoViewModel _new)
         {
             _new.Solicitacao.TipoLeito = _old.TipoLeito;
@@ -95,6 +105,7 @@ namespace ProjetoFinal.Services
             _old.Status = SolicitacaoStatus.REGULADO;
         }
 
+        // Transferir uma solicitação para um novo leito (função auxiliar)
         public void TransferirSolicitacao(Solicitacao _old, SolicitacaoViewModel _new)
         {
             _new.Solicitacao.TipoLeito = _old.TipoLeito;
@@ -105,6 +116,7 @@ namespace ProjetoFinal.Services
             _old.Status = SolicitacaoStatus.REGULADO;
         }
 
+        // Finalizar uma solicitação (função auxiliar)
         public void FinalizarSolicitacao(Solicitacao solicitacao)
         {
             solicitacao.DataFinalizacao = DateTime.Now;

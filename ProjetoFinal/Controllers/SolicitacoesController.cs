@@ -28,7 +28,7 @@ namespace ProjetoFinal.Controllers
 
         public async Task<IActionResult> Create()
         {
-            var pacientes = await _pacienteService.FindPacientesSemSolicitacao();
+            var pacientes = await _pacienteService.FindPacientesSemSolicitacaoAtiva();
             var viewModel = new SolicitacaoViewModel
             {
                 Pacientes = pacientes
