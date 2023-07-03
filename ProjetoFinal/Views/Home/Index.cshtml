@@ -29,7 +29,15 @@
                         <div class="card">
                             <div class="card-body borda-container">
                                 <h5 class="card-title fw-bold text-uppercase text-primary">Porcentagem de Ocupação</h5>
-                                <h6 class="card-subtitle mb-2 fw-bold text-muted">@ViewBag.PorcentagemOcupacao.ToString("0.00")%</h6>
+                                @if (!double.IsNaN(ViewBag.PorcentagemOcupacao))
+                                {
+                                    <h6 class="card-subtitle mb-2 fw-bold text-muted">@ViewBag.PorcentagemOcupacao.ToString("0.00")%</h6>
+                                }
+                                else
+                                {
+                                    <h6 class="card-subtitle mb-2 fw-bold text-muted">Sem dados disponíveis</h6>
+                                }
+                                
                             </div>
                         </div>
                     </div>
