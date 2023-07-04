@@ -1,6 +1,6 @@
 ﻿
 $(document).ready(function () {
-    $('#table-design').DataTable({
+    var dataTable = $('#table-design').DataTable({
         "ordering": true,
         "paging": true,
         "searching": true,
@@ -27,5 +27,12 @@ $(document).ready(function () {
                 "sSortDescending": ": Ordenar colunas de forma descendente"
             }
         }
+    });
+
+    dataTable.on('draw', function () {
+        $('.cpf').mask('000.000.000-00');
+        $('.cep').mask('00000-000');
+        $('.rg').mask('0.000.000');
+        $('.telefone').mask('(00) 00000-0000');
     });
 })
